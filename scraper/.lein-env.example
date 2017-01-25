@@ -1,0 +1,8 @@
+{:bigquery-project-id ""
+ :bigquery-client-id ""
+ :bigquery-client-email ""
+ :bigquery-private-key ""
+ :bigquery-private-key-id ""
+
+ :github-username ""
+ :github-token ""}
