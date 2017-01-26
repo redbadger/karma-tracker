@@ -47,3 +47,69 @@ $ lein run redbadger day.20170123
   #object[org.joda.time.DateTime 0x1e477944 "2017-01-23T09:43:27.000Z"]}
   ...
 ```
+
+## How it works
+
+We're using Java interop to call the BigQuery client library.
+Unfortunately, due to a [JVM bug](http://bugs.java.com/bugdatabase/view_bug.do?bug_id=4283544) dating back to 1999, we can't call the `setCredentials` method on `BigQueryOptions` from Clojure.
+There's a little Java shim in `src/main/java` to construct the `BigQuery` client object, which is used as follows:
+
+```clojure
+(def bigquery
+  (BigQueryBuilder/build (env :bigquery-project-id)
+                         (env :bigquery-client-id)
+                         (env :bigquery-client-email)
+                         (env :bigquery-private-key)
+                         (env :bigquery-private-key-id)))
+```
+
+Note that we are using the `environ` library to read configuration from the environment.
+
+Once you have a client object, you can perform queries from Clojure by constructing a `QueryRequest`.
+The following query returns all users who performed some action on 23 January:
+
+```clojure
+(def all-active-users-query (->
+  (QueryRequest/newBuilder "SELECT DISTINCT actor.login FROM `githubarchive.day.20170123`")
+  (.setUseLegacySql false)
+  .build))
+```
+
+To execute the query, we invoke the `query` method on the `BigQuery` client object, returning a `QueryResponse`.
+We can get the returned rows using the `result` method, and convert into a Clojure sequence by grabbing an iterator via `iterateAll` then using the built-in Clojure function `iterator-seq`:
+
+```clojure
+(def all-active-users-rows (->
+  (.query bigquery all-active-users-query)
+  .result
+  .iterateAll
+  iterator-seq))
+```
+
+The rows are lists of `FieldValue`s:
+
+```clojure
+([#object[com.google.cloud.bigquery.FieldValue 0xf14922e "FieldValue{attribute=PRIMITIVE, value=aferriss}"]]
+ [#object[com.google.cloud.bigquery.FieldValue 0x4e73360a "FieldValue{attribute=PRIMITIVE, value=pjaaskel}"]]
+ ...)
+```
+
+Converting them into a more useful form is a case of grabbing each field in each list, and calling the appropriate conversion method (e.g. `getStringValue` or `getTimestampValue`) to extract its value:
+
+```clojure
+(map #(.getStringValue (first %)) all-active-users-rows)
+
+=> ("aferriss" "pjaaskel" "darylclimb" "SurrealSoul" "ekta1108" ...)
+```
+
+Queries can have named parameters.
+The following function returns a query for all repos interacted with by the given user on 23 January:
+
+```clojure
+(defn user-activity-query [user]
+  (->
+    (QueryRequest/newBuilder "SELECT repo.name FROM `githubarchive.day.20170123` WHERE actor.login = @user")
+    (.addNamedParameter "user" (QueryParameterValue/string user))
+    (.setUseLegacySql false)
+    .build))
+```
