@@ -1,15 +1,10 @@
 # scraper
 
-This is a spike using [Google BigQuery](https://cloud.google.com/bigquery/) to search the [GitHub Archive](https://www.githubarchive.org/) for open-source contributions made by members of a given organisation.
+This is a spike directly searching the [GitHub Archive](https://www.githubarchive.org/) for open-source contributions made by members of a given organisation.
 
 ## Setup
-You'll need a .lein-env file with credentials for both BigQuery and the GitHub API.
+You'll need a .lein-env file with credentials for the GitHub API.
 Copy .lein-env.example to .lein-env and fill in the blanks.
-
-### BigQuery
-Create a new project at the [Google IAM console](https://console.developers.google.com/iam-admin/projects), and enable the BigQuery API.
-Create a set of credentials, choosing a "Service account key" and creating a new service account.
-You will receive a JSON file with your details, which can be copied into .lein-env.
 
 ### GitHub
 Create a new [personal access token](https://github.com/settings/tokens) with the `read:org` permission.
@@ -23,27 +18,111 @@ You can run it with
 $ lein run organisation time-period
 ```
 
-The `time-period` is a table name in the GitHub Archive, for example `year.2016`, `month.201504`, or `day.20130201`.
-BigQuery only allows 1TB of free data processing per month, so stick to individual days unless you want to chew through that pretty quickly!
+The `time-period` corresponds to a filename of an hourly dump in the GitHub Archive, for example `2017-01-23-15`.
 
 ### Example
 
-To fetch contributions from Badgers for 23 January,
+To fetch contributions from Badgers for 23 January between 15:00 and 16:00 UTC,
 
 ```console
-$ lein run redbadger day.20170123
-({:user "samsmith1983",
-  :event "DeleteEvent",
-  :repo "samsmith1983/axis-medical",
-  :details
-  {:ref "23-jan-updates", :ref-type "branch", :pusher-type "user"},
-  :time
-  #object[org.joda.time.DateTime 0x42576db9 "2017-01-23T12:39:08.000Z"]}
- {:user "sheepsteak",
-  :event "WatchEvent",
-  :repo "jlongster/prettier-atom",
-  :details {:action "started"},
-  :time
-  #object[org.joda.time.DateTime 0x1e477944 "2017-01-23T09:43:27.000Z"]}
+$ lein run redbadger 2017-01-23-15
+({:id "5211193985",
+  :type "ReleaseEvent",
+  :actor
+  {:id 19389251,
+   :login "badgerbot",
+   :display-login "badgerbot",
+   :gravatar-id "",
+   :url "https://api.github.com/users/badgerbot",
+   :avatar-url "https://avatars.githubusercontent.com/u/19389251?"},
+  :repo
+  {:id 68023701,
+   :name "redbadger/website-honestly",
+   :url "https://api.github.com/repos/redbadger/website-honestly"},
+  :payload
+  {:action "published",
+   :release
+   {:tag-name "1485356429832",
+    :tarball-url
+    "https://api.github.com/repos/redbadger/website-honestly/tarball/1485356429832",
+    :assets-url
+    "https://api.github.com/repos/redbadger/website-honestly/releases/5263899/assets",
+    :assets [],
+    :name "Deployment @ Wed Jan 25 2017 15:00:29",
+    :published-at "2017-01-25T15:00:30Z",
+    :zipball-url
+    "https://api.github.com/repos/redbadger/website-honestly/zipball/1485356429832",
+    :author
+    {:repos-url "https://api.github.com/users/badgerbot/repos",
+     :following-url
+     "https://api.github.com/users/badgerbot/following{/other_user}",
+     :received-events-url
+     "https://api.github.com/users/badgerbot/received_events",
+     :gists-url
+     "https://api.github.com/users/badgerbot/gists{/gist_id}",
+     :avatar-url
+     "https://avatars.githubusercontent.com/u/19389251?v=3",
+     :type "User",
+     :followers-url "https://api.github.com/users/badgerbot/followers",
+     :login "badgerbot",
+     :gravatar-id "",
+     :events-url
+     "https://api.github.com/users/badgerbot/events{/privacy}",
+     :site-admin false,
+     :id 19389251,
+     :starred-url
+     "https://api.github.com/users/badgerbot/starred{/owner}{/repo}",
+     :url "https://api.github.com/users/badgerbot",
+     :html-url "https://github.com/badgerbot",
+     :organizations-url "https://api.github.com/users/badgerbot/orgs",
+     :subscriptions-url
+     "https://api.github.com/users/badgerbot/subscriptions"},
+    :draft false,
+    :id 5263899,
+    :prerelease false,
+    :url
+    "https://api.github.com/repos/redbadger/website-honestly/releases/5263899",
+    :html-url
+    "https://github.com/redbadger/website-honestly/releases/tag/1485356429832",
+    :target-commitish "master",
+    :upload-url
+    "https://uploads.github.com/repos/redbadger/website-honestly/releases/5263899/assets{?name,label}",
+    :body "* compress brie image (#349)",
+    :created-at "2017-01-25T14:34:18Z"}},
+  :public true,
+  :created-at "2017-01-25T15:00:30Z",
+  :org
+  {:id 265650,
+   :login "redbadger",
+   :gravatar-id "",
+   :url "https://api.github.com/orgs/redbadger",
+   :avatar-url "https://avatars.githubusercontent.com/u/265650?"}}
+ {:id "5211194007",
+  :type "CreateEvent",
+  :actor
+  {:id 19389251,
+   :login "badgerbot",
+   :display-login "badgerbot",
+   :gravatar-id "",
+   :url "https://api.github.com/users/badgerbot",
+   :avatar-url "https://avatars.githubusercontent.com/u/19389251?"},
+  :repo
+  {:id 68023701,
+   :name "redbadger/website-honestly",
+   :url "https://api.github.com/repos/redbadger/website-honestly"},
+  :payload
+  {:ref "1485356429832",
+   :ref-type "tag",
+   :master-branch "master",
+   :description "🦄 The Red Badger website. Honestly.",
+   :pusher-type "user"},
+  :public true,
+  :created-at "2017-01-25T15:00:30Z",
+  :org
+  {:id 265650,
+   :login "redbadger",
+   :gravatar-id "",
+   :url "https://api.github.com/orgs/redbadger",
+   :avatar-url "https://avatars.githubusercontent.com/u/265650?"}}
   ...
 ```
