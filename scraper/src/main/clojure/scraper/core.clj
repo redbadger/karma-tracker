@@ -29,10 +29,10 @@
   (.stringValue field))
 
 (defn json-value [field]
-  (json/read-str (.stringValue field) :key-fn #(keyword (str/replace % "_" "-"))))
+  (json/read-str (.getStringValue field) :key-fn #(keyword (str/replace % "_" "-"))))
 
 (defn time-value [field]
-  (coerce-time/from-long (/ (.timestampValue field) 1000)))
+  (coerce-time/from-long (/ (.getTimestampValue field) 1000)))
 
 (def fields
   {:user string-value
@@ -41,11 +41,11 @@
    :details json-value
    :time time-value})
 
-(defn parse-field [row index transform]
-  (transform (.get row index)))
+(defn parse-field [field transform]
+  (transform field))
 
 (defn parse-row [row]
-  (zipmap (keys fields) (map-indexed (partial parse-field row) (vals fields))))
+  (zipmap (keys fields) (map parse-field row (vals fields))))
 
 (defn users-activity
   [users time-period]
