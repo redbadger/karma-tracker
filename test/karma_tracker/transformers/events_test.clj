@@ -5,6 +5,6 @@
 
 (deftest issue-event-transform
   (testing "Transforms a Github IssueEvent into an event map"
-    (def input-issue stubs/issue-stub)
-    (def expected-event {:action "closed" :type "issue"})
-    (is (= expected-event (transform-to-event input-issue)))))
+    (let [input-issue stubs/issue-stub
+          expected-event {:action "closed" :type "issue"}]
+      (is (= expected-event (transform-to-event input-issue))))))
