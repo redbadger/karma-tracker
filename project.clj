@@ -9,4 +9,4 @@
   :main ^:skip-aot karma-tracker.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
-             :dev {:resource-paths ["resources-test"]}})
+             :test {:resource-paths ["resources-test"]}})
