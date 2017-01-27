@@ -1,7 +1,4 @@
-(ns karma-tracker.transformers.stubs)
-
-(def issue-stub
-   {:id "5218163368",
+{:id "5218163368",
  :type "IssuesEvent",
  :actor
  {:id 810438,
@@ -74,4 +71,4 @@
   :login "facebook",
   :gravatar_id "",
   :url "https://api.github.com/orgs/facebook",
-  :avatar_url "https://avatars.githubusercontent.com/u/69631?"}})
+  :avatar_url "https://avatars.githubusercontent.com/u/69631?"}}
