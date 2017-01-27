@@ -7,7 +7,7 @@ example helper functions that use the library to fetch information about organiz
 
 In the `project.clj` file we've added Tentacles to our project dependencies. Due to an issue with Clojure 1.8.0, we must also
 use [jitpack](https://jitpack.io/).
-```
+```clojure
 :repositories [["jitpack" "https://jitpack.io"]]
 :dependencies [[org.clojure/clojure "1.8.0"]
                [com.github.raynes/tentacles "0e16d9f"]]
@@ -16,13 +16,13 @@ use [jitpack](https://jitpack.io/).
 ## Orgs
 
 Functions for accessing information about orgs are available under `tentacles.orgs`:
-```
+```clojure
 (ns open-source-tracker.core
   (:require [tentacles.orgs :as orgs]))
 ```
 
 The following function counts the number of members in an organization given the org's name:
-```
+```clojure
 (defn get-num-org-members [org & [opts]]
   (count (orgs/members org opts)))
   
@@ -30,13 +30,13 @@ The following function counts the number of members in an organization given the
 => 14
 ```
 Without authentication `orgs/members` will return only public members of an organization. To add authentication, pass a map of options containing an `:auth` keyword as the last argument. You can also add other options like `:per-page` (number of results per page) and `:all-pages` (if true, returns all available pages):
-```
+```clojure
 (get-num-org-members "redbadger" {:auth "mveritym:PASSORAUTHTOKEN" :per-page 100 :all-pages true})
 => 74
 ```
 
 Accessing information about each member is as simple as querying keys in the returned member map:
-```
+```clojure
 (defn get-member-names [org & [opts]]
   (map :login (orgs/members org opts)))
 
@@ -45,7 +45,7 @@ Accessing information about each member is as simple as querying keys in the ret
 ```
 
 A more general version:
-```
+```clojure
 (defn get-member-prop [org prop & [opts]]
   (map prop (orgs/members org opts)))
   
@@ -56,13 +56,13 @@ A more general version:
 ## Events
 
 Functions for accessing information about events are available under `tentacles.events`:
-```
+```clojure
 (ns open-source-tracker.core
   (:require [tentacles.events :as events]))
 ```
 
 For our purposes, we are most interested in events the user has performed: opening pull requests, commenting on issues, etc. We can get these with `events/performed-events`. Map over the returned sequence of events to get specific information about each event:
-```
+```clojure
 (defn get-all-events [member & [opts]]
   (let [events (events/performed-events member opts)]
     (map :created_at events)))
@@ -72,7 +72,7 @@ For our purposes, we are most interested in events the user has performed: openi
 ```
 
 Filter by event type to narrow your focus to pull requests, issues, or [another type](https://developer.github.com/v3/activity/events/types/) of event:
-```
+```clojure
 (defn get-events-by-type [user event-type & [opts]]
   (let [events (events/performed-events user opts)]
     (filter #(= (:type %) event-type) events)))
@@ -84,7 +84,7 @@ Filter by event type to narrow your focus to pull requests, issues, or [another 
 ```
 
 Putting it all together! We can create a sequence of maps with the org's members' logins and the number of public pull request events they've made over the last three months (a Github limit). Authenticate to include private users too.
-```
+```clojure
 (defn get-num-prs [member & [opts]]
   (count (get-events-by-type member "PullRequestEvent" opts)))
 
@@ -102,7 +102,7 @@ Putting it all together! We can create a sequence of maps with the org's members
 ```
 ## Rate Limit
 Although Tentacles doesn't have a specific method for fetching information about the rate-limit we can use its core `api-call` function to make a safe request to the rate-limit endpoint.
-```
+```clojure
 (ns open-source-tracker.core
   (:require [tentacles.core :as tcore]))
   
