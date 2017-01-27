@@ -6,7 +6,7 @@
 
 (deftest issue-event-transform
   (testing "Transforms a Github IssueEvent into an event map"
-    (let [input-file (io/file (io/resource  "event-transformer.edn"))
-          input-issue (edn/read-string (slurp input-file))
+    (let [input-file (-> "event-transformer.edn" io/resource io/file)
+          input-issue (-> input-file slurp edn/read-string)
           expected-event {:action "closed" :type "issue"}]
       (is (= expected-event (transform-to-event input-issue))))))
