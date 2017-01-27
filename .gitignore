@@ -6,7 +6,9 @@ pom.xml.asc
 /target/
 /checkouts/
 .lein-deps-sum
-.lein-repl-history
-.lein-plugins/
+.lein-env
 .lein-failures
+.lein-plugins/
+.lein-repl-history
 .nrepl-port
+.karma-cache

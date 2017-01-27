@@ -5,7 +5,13 @@
             :url "https://www.gnu.org/licenses/gpl-3.0.en.html"}
   :repositories [["jitpack" "https://jitpack.io"]]
   :dependencies [[org.clojure/clojure "1.9.0-alpha14"]
-                 [com.github.raynes/tentacles "0e16d9f"]]
+                 [com.github.raynes/tentacles "0e16d9f"]
+                 [com.taoensso/nippy "2.12.2"]
+                 [environ "1.1.0"]]
+  :plugins [[lein-environ "1.1.0"]]
   :main ^:skip-aot karma-tracker.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :clean-targets [:target-path :compile-path [:env :cache-dir]]
+  :env {:cache-dir ".karma-cache"}
+  :profiles {:uberjar {:aot :all}
+             :test {:env {:cache-dir "test/.karma-cache"}}})
