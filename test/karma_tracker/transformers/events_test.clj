@@ -8,5 +8,8 @@
   (testing "Transforms a Github IssueEvent into an event map"
     (let [input-file (-> "event-transformer.edn" io/resource io/file)
           input-issue (-> input-file slurp edn/read-string)
-          expected-event {:action "closed" :type "issue"}]
+          expected-event {:action "closed"
+                          :type "issue"
+                          :repo {:name "facebook/react" :id 10270250}
+                          :user {:login "gaearon" :id 810438}}]
       (is (= expected-event (transform-to-event input-issue))))))
