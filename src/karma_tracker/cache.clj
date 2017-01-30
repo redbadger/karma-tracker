@@ -40,3 +40,9 @@
       (if (.exists file)
         (read-cache file)
         (write-cache file (client request))))))
+
+(defmacro with-cache
+  "Perform the body of the macro with HTTP caching enabled."
+  [& body]
+  `(http/with-middleware (conj http/*current-middleware* wrap-cache)
+     ~@body))
