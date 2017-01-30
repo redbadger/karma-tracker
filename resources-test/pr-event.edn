@@ -1,0 +1,458 @@
+{:id "5227046723",
+ :type "PullRequestEvent",
+ :actor
+ {:id 810438,
+  :login "gaearon",
+  :display_login "gaearon",
+  :gravatar_id "",
+  :url "https://api.github.com/users/gaearon",
+  :avatar_url "https://avatars.githubusercontent.com/u/810438?"},
+ :repo
+ {:id 12601374,
+  :name "facebook/react-devtools",
+  :url "https://api.github.com/repos/facebook/react-devtools"},
+ :payload
+ {:action "closed",
+  :number 448,
+  :pull_request
+  {:html_url "https://github.com/facebook/react-devtools/pull/448",
+   :merge_commit_sha "c679b6a3e28a6e119cd0ac222e5572e4c2c5ad66",
+   :mergeable_state "unknown",
+   :mergeable nil,
+   :patch_url
+   "https://github.com/facebook/react-devtools/pull/448.patch",
+   :assignees [],
+   :additions 1,
+   :closed_at "2017-01-27T23:34:46Z",
+   :merged true,
+   :review_comment_url
+   "https://api.github.com/repos/facebook/react-devtools/pulls/comments{/number}",
+   :number 448,
+   :milestone nil,
+   :comments 1,
+   :merged_at "2017-01-27T23:34:46Z",
+   :statuses_url
+   "https://api.github.com/repos/facebook/react-devtools/statuses/8888accc76bcd126e9fb6a96b90fba4d031665c7",
+   :state "closed",
+   :changed_files 1,
+   :issue_url
+   "https://api.github.com/repos/facebook/react-devtools/issues/448",
+   :title "Make sure Firefox build works in fresh checkouts",
+   :commits_url
+   "https://api.github.com/repos/facebook/react-devtools/pulls/448/commits",
+   :updated_at "2017-01-27T23:34:46Z",
+   :head
+   {:label "zpao:clean-ff-build",
+    :ref "clean-ff-build",
+    :sha "8888accc76bcd126e9fb6a96b90fba4d031665c7",
+    :user
+    {:html_url "https://github.com/zpao",
+     :gravatar_id "",
+     :followers_url "https://api.github.com/users/zpao/followers",
+     :subscriptions_url
+     "https://api.github.com/users/zpao/subscriptions",
+     :site_admin false,
+     :following_url
+     "https://api.github.com/users/zpao/following{/other_user}",
+     :type "User",
+     :received_events_url
+     "https://api.github.com/users/zpao/received_events",
+     :login "zpao",
+     :organizations_url "https://api.github.com/users/zpao/orgs",
+     :id 8445,
+     :events_url
+     "https://api.github.com/users/zpao/events{/privacy}",
+     :url "https://api.github.com/users/zpao",
+     :repos_url "https://api.github.com/users/zpao/repos",
+     :starred_url
+     "https://api.github.com/users/zpao/starred{/owner}{/repo}",
+     :gists_url "https://api.github.com/users/zpao/gists{/gist_id}",
+     :avatar_url "https://avatars.githubusercontent.com/u/8445?v=3"},
+    :repo
+    {:html_url "https://github.com/zpao/react-devtools",
+     :description
+     "React Developer Tools is a Chrome extension that allows you to inspect the React component hierarchy in the Chrome Developer Tools (formerly WebKit Web Inspector).",
+     :open_issues_count 0,
+     :watchers 0,
+     :ssh_url "git@github.com:zpao/react-devtools.git",
+     :hooks_url
+     "https://api.github.com/repos/zpao/react-devtools/hooks",
+     :archive_url
+     "https://api.github.com/repos/zpao/react-devtools/{archive_format}{/ref}",
+     :keys_url
+     "https://api.github.com/repos/zpao/react-devtools/keys{/key_id}",
+     :forks_count 0,
+     :languages_url
+     "https://api.github.com/repos/zpao/react-devtools/languages",
+     :git_url "git://github.com/zpao/react-devtools.git",
+     :issue_comment_url
+     "https://api.github.com/repos/zpao/react-devtools/issues/comments{/number}",
+     :git_refs_url
+     "https://api.github.com/repos/zpao/react-devtools/git/refs{/sha}",
+     :clone_url "https://github.com/zpao/react-devtools.git",
+     :contents_url
+     "https://api.github.com/repos/zpao/react-devtools/contents/{+path}",
+     :has_downloads true,
+     :teams_url
+     "https://api.github.com/repos/zpao/react-devtools/teams",
+     :has_issues false,
+     :issue_events_url
+     "https://api.github.com/repos/zpao/react-devtools/issues/events{/number}",
+     :private false,
+     :watchers_count 0,
+     :collaborators_url
+     "https://api.github.com/repos/zpao/react-devtools/collaborators{/collaborator}",
+     :homepage
+     "https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi",
+     :git_commits_url
+     "https://api.github.com/repos/zpao/react-devtools/git/commits{/sha}",
+     :name "react-devtools",
+     :releases_url
+     "https://api.github.com/repos/zpao/react-devtools/releases{/id}",
+     :milestones_url
+     "https://api.github.com/repos/zpao/react-devtools/milestones{/number}",
+     :svn_url "https://github.com/zpao/react-devtools",
+     :merges_url
+     "https://api.github.com/repos/zpao/react-devtools/merges",
+     :compare_url
+     "https://api.github.com/repos/zpao/react-devtools/compare/{base}...{head}",
+     :stargazers_count 0,
+     :tags_url
+     "https://api.github.com/repos/zpao/react-devtools/tags",
+     :statuses_url
+     "https://api.github.com/repos/zpao/react-devtools/statuses/{sha}",
+     :notifications_url
+     "https://api.github.com/repos/zpao/react-devtools/notifications{?since,all,participating}",
+     :open_issues 0,
+     :has_wiki true,
+     :size 8231,
+     :assignees_url
+     "https://api.github.com/repos/zpao/react-devtools/assignees{/user}",
+     :commits_url
+     "https://api.github.com/repos/zpao/react-devtools/commits{/sha}",
+     :labels_url
+     "https://api.github.com/repos/zpao/react-devtools/labels{/name}",
+     :forks_url
+     "https://api.github.com/repos/zpao/react-devtools/forks",
+     :contributors_url
+     "https://api.github.com/repos/zpao/react-devtools/contributors",
+     :updated_at "2014-07-31T21:59:18Z",
+     :pulls_url
+     "https://api.github.com/repos/zpao/react-devtools/pulls{/number}",
+     :has_pages false,
+     :default_branch "master",
+     :language nil,
+     :comments_url
+     "https://api.github.com/repos/zpao/react-devtools/comments{/number}",
+     :id 22488724,
+     :stargazers_url
+     "https://api.github.com/repos/zpao/react-devtools/stargazers",
+     :issues_url
+     "https://api.github.com/repos/zpao/react-devtools/issues{/number}",
+     :trees_url
+     "https://api.github.com/repos/zpao/react-devtools/git/trees{/sha}",
+     :events_url
+     "https://api.github.com/repos/zpao/react-devtools/events",
+     :branches_url
+     "https://api.github.com/repos/zpao/react-devtools/branches{/branch}",
+     :url "https://api.github.com/repos/zpao/react-devtools",
+     :downloads_url
+     "https://api.github.com/repos/zpao/react-devtools/downloads",
+     :forks 0,
+     :subscribers_url
+     "https://api.github.com/repos/zpao/react-devtools/subscribers",
+     :full_name "zpao/react-devtools",
+     :blobs_url
+     "https://api.github.com/repos/zpao/react-devtools/git/blobs{/sha}",
+     :subscription_url
+     "https://api.github.com/repos/zpao/react-devtools/subscription",
+     :fork true,
+     :deployments_url
+     "https://api.github.com/repos/zpao/react-devtools/deployments",
+     :pushed_at "2016-11-04T01:23:33Z",
+     :owner
+     {:html_url "https://github.com/zpao",
+      :gravatar_id "",
+      :followers_url "https://api.github.com/users/zpao/followers",
+      :subscriptions_url
+      "https://api.github.com/users/zpao/subscriptions",
+      :site_admin false,
+      :following_url
+      "https://api.github.com/users/zpao/following{/other_user}",
+      :type "User",
+      :received_events_url
+      "https://api.github.com/users/zpao/received_events",
+      :login "zpao",
+      :organizations_url "https://api.github.com/users/zpao/orgs",
+      :id 8445,
+      :events_url
+      "https://api.github.com/users/zpao/events{/privacy}",
+      :url "https://api.github.com/users/zpao",
+      :repos_url "https://api.github.com/users/zpao/repos",
+      :starred_url
+      "https://api.github.com/users/zpao/starred{/owner}{/repo}",
+      :gists_url "https://api.github.com/users/zpao/gists{/gist_id}",
+      :avatar_url
+      "https://avatars.githubusercontent.com/u/8445?v=3"},
+     :git_tags_url
+     "https://api.github.com/repos/zpao/react-devtools/git/tags{/sha}",
+     :created_at "2014-07-31T23:26:54Z",
+     :mirror_url nil}},
+   :diff_url
+   "https://github.com/facebook/react-devtools/pull/448.diff",
+   :maintainer_can_modify false,
+   :comments_url
+   "https://api.github.com/repos/facebook/react-devtools/issues/448/comments",
+   :deletions 1,
+   :locked false,
+   :id 92269941,
+   :commits 1,
+   :url
+   "https://api.github.com/repos/facebook/react-devtools/pulls/448",
+   :review_comments 0,
+   :base
+   {:label "facebook:master",
+    :ref "master",
+    :sha "ec328ee3da8bbcb1afa8fcdd84197cbed33a542e",
+    :user
+    {:html_url "https://github.com/facebook",
+     :gravatar_id "",
+     :followers_url
+     "https://api.github.com/users/facebook/followers",
+     :subscriptions_url
+     "https://api.github.com/users/facebook/subscriptions",
+     :site_admin false,
+     :following_url
+     "https://api.github.com/users/facebook/following{/other_user}",
+     :type "Organization",
+     :received_events_url
+     "https://api.github.com/users/facebook/received_events",
+     :login "facebook",
+     :organizations_url "https://api.github.com/users/facebook/orgs",
+     :id 69631,
+     :events_url
+     "https://api.github.com/users/facebook/events{/privacy}",
+     :url "https://api.github.com/users/facebook",
+     :repos_url "https://api.github.com/users/facebook/repos",
+     :starred_url
+     "https://api.github.com/users/facebook/starred{/owner}{/repo}",
+     :gists_url
+     "https://api.github.com/users/facebook/gists{/gist_id}",
+     :avatar_url
+     "https://avatars.githubusercontent.com/u/69631?v=3"},
+    :repo
+    {:html_url "https://github.com/facebook/react-devtools",
+     :description
+     "An extension that allows inspection of React component hierarchy in Chrome Developer Tools.",
+     :open_issues_count 108,
+     :watchers 3305,
+     :ssh_url "git@github.com:facebook/react-devtools.git",
+     :hooks_url
+     "https://api.github.com/repos/facebook/react-devtools/hooks",
+     :archive_url
+     "https://api.github.com/repos/facebook/react-devtools/{archive_format}{/ref}",
+     :keys_url
+     "https://api.github.com/repos/facebook/react-devtools/keys{/key_id}",
+     :forks_count 379,
+     :languages_url
+     "https://api.github.com/repos/facebook/react-devtools/languages",
+     :git_url "git://github.com/facebook/react-devtools.git",
+     :issue_comment_url
+     "https://api.github.com/repos/facebook/react-devtools/issues/comments{/number}",
+     :git_refs_url
+     "https://api.github.com/repos/facebook/react-devtools/git/refs{/sha}",
+     :clone_url "https://github.com/facebook/react-devtools.git",
+     :contents_url
+     "https://api.github.com/repos/facebook/react-devtools/contents/{+path}",
+     :has_downloads true,
+     :teams_url
+     "https://api.github.com/repos/facebook/react-devtools/teams",
+     :has_issues true,
+     :issue_events_url
+     "https://api.github.com/repos/facebook/react-devtools/issues/events{/number}",
+     :private false,
+     :watchers_count 3305,
+     :collaborators_url
+     "https://api.github.com/repos/facebook/react-devtools/collaborators{/collaborator}",
+     :homepage "",
+     :git_commits_url
+     "https://api.github.com/repos/facebook/react-devtools/git/commits{/sha}",
+     :name "react-devtools",
+     :releases_url
+     "https://api.github.com/repos/facebook/react-devtools/releases{/id}",
+     :milestones_url
+     "https://api.github.com/repos/facebook/react-devtools/milestones{/number}",
+     :svn_url "https://github.com/facebook/react-devtools",
+     :merges_url
+     "https://api.github.com/repos/facebook/react-devtools/merges",
+     :compare_url
+     "https://api.github.com/repos/facebook/react-devtools/compare/{base}...{head}",
+     :stargazers_count 3305,
+     :tags_url
+     "https://api.github.com/repos/facebook/react-devtools/tags",
+     :statuses_url
+     "https://api.github.com/repos/facebook/react-devtools/statuses/{sha}",
+     :notifications_url
+     "https://api.github.com/repos/facebook/react-devtools/notifications{?since,all,participating}",
+     :open_issues 108,
+     :has_wiki true,
+     :size 9434,
+     :assignees_url
+     "https://api.github.com/repos/facebook/react-devtools/assignees{/user}",
+     :commits_url
+     "https://api.github.com/repos/facebook/react-devtools/commits{/sha}",
+     :labels_url
+     "https://api.github.com/repos/facebook/react-devtools/labels{/name}",
+     :forks_url
+     "https://api.github.com/repos/facebook/react-devtools/forks",
+     :contributors_url
+     "https://api.github.com/repos/facebook/react-devtools/contributors",
+     :updated_at "2017-01-27T21:53:49Z",
+     :pulls_url
+     "https://api.github.com/repos/facebook/react-devtools/pulls{/number}",
+     :has_pages false,
+     :default_branch "master",
+     :language "JavaScript",
+     :comments_url
+     "https://api.github.com/repos/facebook/react-devtools/comments{/number}",
+     :id 12601374,
+     :stargazers_url
+     "https://api.github.com/repos/facebook/react-devtools/stargazers",
+     :issues_url
+     "https://api.github.com/repos/facebook/react-devtools/issues{/number}",
+     :trees_url
+     "https://api.github.com/repos/facebook/react-devtools/git/trees{/sha}",
+     :events_url
+     "https://api.github.com/repos/facebook/react-devtools/events",
+     :branches_url
+     "https://api.github.com/repos/facebook/react-devtools/branches{/branch}",
+     :url "https://api.github.com/repos/facebook/react-devtools",
+     :downloads_url
+     "https://api.github.com/repos/facebook/react-devtools/downloads",
+     :forks 379,
+     :subscribers_url
+     "https://api.github.com/repos/facebook/react-devtools/subscribers",
+     :full_name "facebook/react-devtools",
+     :blobs_url
+     "https://api.github.com/repos/facebook/react-devtools/git/blobs{/sha}",
+     :subscription_url
+     "https://api.github.com/repos/facebook/react-devtools/subscription",
+     :fork false,
+     :deployments_url
+     "https://api.github.com/repos/facebook/react-devtools/deployments",
+     :pushed_at "2017-01-27T23:34:46Z",
+     :owner
+     {:html_url "https://github.com/facebook",
+      :gravatar_id "",
+      :followers_url
+      "https://api.github.com/users/facebook/followers",
+      :subscriptions_url
+      "https://api.github.com/users/facebook/subscriptions",
+      :site_admin false,
+      :following_url
+      "https://api.github.com/users/facebook/following{/other_user}",
+      :type "Organization",
+      :received_events_url
+      "https://api.github.com/users/facebook/received_events",
+      :login "facebook",
+      :organizations_url
+      "https://api.github.com/users/facebook/orgs",
+      :id 69631,
+      :events_url
+      "https://api.github.com/users/facebook/events{/privacy}",
+      :url "https://api.github.com/users/facebook",
+      :repos_url "https://api.github.com/users/facebook/repos",
+      :starred_url
+      "https://api.github.com/users/facebook/starred{/owner}{/repo}",
+      :gists_url
+      "https://api.github.com/users/facebook/gists{/gist_id}",
+      :avatar_url
+      "https://avatars.githubusercontent.com/u/69631?v=3"},
+     :git_tags_url
+     "https://api.github.com/repos/facebook/react-devtools/git/tags{/sha}",
+     :created_at "2013-09-04T20:28:43Z",
+     :mirror_url nil}},
+   :_links
+   {:self
+    {:href
+     "https://api.github.com/repos/facebook/react-devtools/pulls/448"},
+    :html
+    {:href "https://github.com/facebook/react-devtools/pull/448"},
+    :issue
+    {:href
+     "https://api.github.com/repos/facebook/react-devtools/issues/448"},
+    :comments
+    {:href
+     "https://api.github.com/repos/facebook/react-devtools/issues/448/comments"},
+    :review_comments
+    {:href
+     "https://api.github.com/repos/facebook/react-devtools/pulls/448/comments"},
+    :review_comment
+    {:href
+     "https://api.github.com/repos/facebook/react-devtools/pulls/comments{/number}"},
+    :commits
+    {:href
+     "https://api.github.com/repos/facebook/react-devtools/pulls/448/commits"},
+    :statuses
+    {:href
+     "https://api.github.com/repos/facebook/react-devtools/statuses/8888accc76bcd126e9fb6a96b90fba4d031665c7"}},
+   :body "for those of us who don't have an existing build already",
+   :merged_by
+   {:html_url "https://github.com/gaearon",
+    :gravatar_id "",
+    :followers_url "https://api.github.com/users/gaearon/followers",
+    :subscriptions_url
+    "https://api.github.com/users/gaearon/subscriptions",
+    :site_admin false,
+    :following_url
+    "https://api.github.com/users/gaearon/following{/other_user}",
+    :type "User",
+    :received_events_url
+    "https://api.github.com/users/gaearon/received_events",
+    :login "gaearon",
+    :organizations_url "https://api.github.com/users/gaearon/orgs",
+    :id 810438,
+    :events_url
+    "https://api.github.com/users/gaearon/events{/privacy}",
+    :url "https://api.github.com/users/gaearon",
+    :repos_url "https://api.github.com/users/gaearon/repos",
+    :starred_url
+    "https://api.github.com/users/gaearon/starred{/owner}{/repo}",
+    :gists_url
+    "https://api.github.com/users/gaearon/gists{/gist_id}",
+    :avatar_url
+    "https://avatars.githubusercontent.com/u/810438?v=3"},
+   :user
+   {:html_url "https://github.com/zpao",
+    :gravatar_id "",
+    :followers_url "https://api.github.com/users/zpao/followers",
+    :subscriptions_url
+    "https://api.github.com/users/zpao/subscriptions",
+    :site_admin false,
+    :following_url
+    "https://api.github.com/users/zpao/following{/other_user}",
+    :type "User",
+    :received_events_url
+    "https://api.github.com/users/zpao/received_events",
+    :login "zpao",
+    :organizations_url "https://api.github.com/users/zpao/orgs",
+    :id 8445,
+    :events_url "https://api.github.com/users/zpao/events{/privacy}",
+    :url "https://api.github.com/users/zpao",
+    :repos_url "https://api.github.com/users/zpao/repos",
+    :starred_url
+    "https://api.github.com/users/zpao/starred{/owner}{/repo}",
+    :gists_url "https://api.github.com/users/zpao/gists{/gist_id}",
+    :avatar_url "https://avatars.githubusercontent.com/u/8445?v=3"},
+   :review_comments_url
+   "https://api.github.com/repos/facebook/react-devtools/pulls/448/comments",
+   :assignee nil,
+   :created_at "2016-11-04T01:24:15Z"}},
+ :public true,
+ :created_at "2017-01-27T23:34:46Z",
+ :org
+ {:id 69631,
+  :login "facebook",
+  :gravatar_id "",
+  :url "https://api.github.com/orgs/facebook",
+  :avatar_url "https://avatars.githubusercontent.com/u/69631?"}}
