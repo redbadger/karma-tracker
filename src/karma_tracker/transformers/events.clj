@@ -8,11 +8,11 @@
 (defn transform-to-event [event]
   (let [event-type (-> event :type get-event-type)
         action     (-> event :payload :action)
-        repoId     (-> event :repo :id)
-        repoName   (-> event :repo :name)
-        userId     (-> event :actor :id)
-        userLogin  (-> event :actor :login)]
+        repo-id     (-> event :repo :id)
+        repo-name   (-> event :repo :name)
+        user-id     (-> event :actor :id)
+        user-login  (-> event :actor :login)]
     {:type event-type
      :action action
-     :repo {:id repoId :name repoName}
-     :user {:id userId :login userLogin}}))
+     :repo {:id repo-id :name repo-name}
+     :user {:id user-id :login user-login}}))
