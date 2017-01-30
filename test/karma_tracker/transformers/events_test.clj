@@ -13,7 +13,7 @@
                           :repo {:name "facebook/react" :id 10270250}
                           :user {:login "gaearon" :id 810438}
                           :created-at "2017-01-26T15:50:20Z"}]
-      (is (= expected-event (transform-to-event input-issue))))))
+      (is (= expected-event (normalize input-issue))))))
 
 (deftest pr-comment-event-transform
   (testing "Transforms a Github PullRequestReviewCommentEvent into an event map"
@@ -24,7 +24,7 @@
                                :repo {:name "redbadger/karma-tracker" :id 80008322}
                                :user {:login "mveritym" :id 1009524}
                                :created-at "2017-01-30T11:35:09Z"}]
-      (is (= expected-pr-comment (transform-to-event input-pr-comment))))))
+      (is (= expected-pr-comment (normalize input-pr-comment))))))
 
 (deftest pr-event-transform
   (testing "Transforms a Github PullRequestEvent into an event map"
@@ -35,4 +35,4 @@
                        :repo {:name "facebook/react-devtools" :id 12601374}
                        :user {:login "gaearon" :id 810438}
                        :created-at "2017-01-27T23:34:46Z"}]
-      (is (= expected-pr (transform-to-event input-pr))))))
+      (is (= expected-pr (normalize input-pr))))))

@@ -19,8 +19,8 @@
 
 (defn new-connection
   ([user token default-opts]
-   (->Connection (merge {:auth (str user ":" token)
-                         :per-page 100
+   (->Connection (merge {:auth      (str user ":" token)
+                         :per-page  100
                          :all-pages true}
                         default-opts)))
   ([]
