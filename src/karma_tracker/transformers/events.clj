@@ -17,4 +17,4 @@
      :action action
      :repo {:id repo-id :name repo-name}
      :user {:id user-id :login user-login}
-     :created_at created-at}))
+     :created-at created-at}))

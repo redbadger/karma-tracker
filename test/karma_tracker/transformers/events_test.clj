@@ -12,5 +12,5 @@
                           :type "issue"
                           :repo {:name "facebook/react" :id 10270250}
                           :user {:login "gaearon" :id 810438}
-                          :created_at "2017-01-26T15:50:20Z"}]
+                          :created-at "2017-01-26T15:50:20Z"}]
       (is (= expected-event (transform-to-event input-issue))))))
