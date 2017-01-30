@@ -1,0 +1,489 @@
+{:id "5233059393",
+ :type "PullRequestReviewCommentEvent",
+ :actor
+ {:id 1009524,
+  :login "mveritym",
+  :display_login "mveritym",
+  :gravatar_id "",
+  :url "https://api.github.com/users/mveritym",
+  :avatar_url "https://avatars.githubusercontent.com/u/1009524?"},
+ :repo
+ {:id 80008322,
+  :name "redbadger/karma-tracker",
+  :url "https://api.github.com/repos/redbadger/karma-tracker"},
+ :payload
+ {:action "created",
+  :comment
+  {:html_url
+   "https://github.com/redbadger/karma-tracker/pull/6#discussion_r98423347",
+   :path "test/karma_tracker/github_test.clj",
+   :original_commit_id "9b7725aeaa3aa17851a354cb48f2515d7907eadb",
+   :pull_request_url
+   "https://api.github.com/repos/redbadger/karma-tracker/pulls/6",
+   :updated_at "2017-01-30T11:35:21Z",
+   :pull_request_review_id 19061944,
+   :id 98423347,
+   :diff_hunk
+   "@@ -0,0 +1,25 @@\n+(ns karma-tracker.github-test\n+  (:require [clojure.test :refer :all]\n+            [karma-tracker.github :refer :all]\n+            [tentacles\n+             [events :as events]\n+             [orgs :as orgs]]))\n+\n+(defn fake-call [& args] args)\n+\n+(deftest github-client-test\n+  (let [conn (new-connection \"hacker\" \"H4CK3RT0CK3N\" {})\n+        {{:keys [auth per-page all-pages] :as opts} :opts} conn]\n+\n+    (testing \"connection initialized\"\n+      (is (= auth \"hacker:H4CK3RT0CK3N\"))\n+      (is (= per-page 100))\n+      (is (= all-pages true)))\n+\n+    (testing \"organization members api call\"\n+      (with-redefs [orgs/members fake-call]\n+        (is (= [\"redbadger\" opts] (organisation-members conn \"redbadger\")))))",
+   :url
+   "https://api.github.com/repos/redbadger/karma-tracker/pulls/comments/98423347",
+   :position 21,
+   :_links
+   {:self
+    {:href
+     "https://api.github.com/repos/redbadger/karma-tracker/pulls/comments/98423347"},
+    :html
+    {:href
+     "https://github.com/redbadger/karma-tracker/pull/6#discussion_r98423347"},
+    :pull_request
+    {:href
+     "https://api.github.com/repos/redbadger/karma-tracker/pulls/6"}},
+   :commit_id "9b7725aeaa3aa17851a354cb48f2515d7907eadb",
+   :body
+   "This might be over-engineering but we could keep track of calls to `fake-call` to test that the api is getting called at the right time with the right arguments. Also passing in the api call as a dependency would avoid the `with-redefs` call but again, probably over-complicates things.",
+   :user
+   {:html_url "https://github.com/mveritym",
+    :gravatar_id "",
+    :followers_url "https://api.github.com/users/mveritym/followers",
+    :subscriptions_url
+    "https://api.github.com/users/mveritym/subscriptions",
+    :site_admin false,
+    :following_url
+    "https://api.github.com/users/mveritym/following{/other_user}",
+    :type "User",
+    :received_events_url
+    "https://api.github.com/users/mveritym/received_events",
+    :login "mveritym",
+    :organizations_url "https://api.github.com/users/mveritym/orgs",
+    :id 1009524,
+    :events_url
+    "https://api.github.com/users/mveritym/events{/privacy}",
+    :url "https://api.github.com/users/mveritym",
+    :repos_url "https://api.github.com/users/mveritym/repos",
+    :starred_url
+    "https://api.github.com/users/mveritym/starred{/owner}{/repo}",
+    :gists_url
+    "https://api.github.com/users/mveritym/gists{/gist_id}",
+    :avatar_url
+    "https://avatars.githubusercontent.com/u/1009524?v=3"},
+   :original_position 21,
+   :created_at "2017-01-30T11:35:09Z"},
+  :pull_request
+  {:html_url "https://github.com/redbadger/karma-tracker/pull/6",
+   :merge_commit_sha "c219465ccee0d3c8dd5c01cd2150bc63263c9f69",
+   :patch_url
+   "https://github.com/redbadger/karma-tracker/pull/6.patch",
+   :assignees [],
+   :closed_at nil,
+   :review_comment_url
+   "https://api.github.com/repos/redbadger/karma-tracker/pulls/comments{/number}",
+   :number 6,
+   :milestone nil,
+   :merged_at nil,
+   :statuses_url
+   "https://api.github.com/repos/redbadger/karma-tracker/statuses/9b7725aeaa3aa17851a354cb48f2515d7907eadb",
+   :state "open",
+   :issue_url
+   "https://api.github.com/repos/redbadger/karma-tracker/issues/6",
+   :title "GitHub client",
+   :commits_url
+   "https://api.github.com/repos/redbadger/karma-tracker/pulls/6/commits",
+   :updated_at "2017-01-30T11:35:21Z",
+   :head
+   {:label "redbadger:github-client",
+    :ref "github-client",
+    :sha "9b7725aeaa3aa17851a354cb48f2515d7907eadb",
+    :user
+    {:html_url "https://github.com/redbadger",
+     :gravatar_id "",
+     :followers_url
+     "https://api.github.com/users/redbadger/followers",
+     :subscriptions_url
+     "https://api.github.com/users/redbadger/subscriptions",
+     :site_admin false,
+     :following_url
+     "https://api.github.com/users/redbadger/following{/other_user}",
+     :type "Organization",
+     :received_events_url
+     "https://api.github.com/users/redbadger/received_events",
+     :login "redbadger",
+     :organizations_url
+     "https://api.github.com/users/redbadger/orgs",
+     :id 265650,
+     :events_url
+     "https://api.github.com/users/redbadger/events{/privacy}",
+     :url "https://api.github.com/users/redbadger",
+     :repos_url "https://api.github.com/users/redbadger/repos",
+     :starred_url
+     "https://api.github.com/users/redbadger/starred{/owner}{/repo}",
+     :gists_url
+     "https://api.github.com/users/redbadger/gists{/gist_id}",
+     :avatar_url
+     "https://avatars.githubusercontent.com/u/265650?v=3"},
+    :repo
+    {:html_url "https://github.com/redbadger/karma-tracker",
+     :description
+     "Open Source contributions' tracker for organisations",
+     :open_issues_count 2,
+     :watchers 1,
+     :ssh_url "git@github.com:redbadger/karma-tracker.git",
+     :hooks_url
+     "https://api.github.com/repos/redbadger/karma-tracker/hooks",
+     :archive_url
+     "https://api.github.com/repos/redbadger/karma-tracker/{archive_format}{/ref}",
+     :keys_url
+     "https://api.github.com/repos/redbadger/karma-tracker/keys{/key_id}",
+     :forks_count 0,
+     :languages_url
+     "https://api.github.com/repos/redbadger/karma-tracker/languages",
+     :git_url "git://github.com/redbadger/karma-tracker.git",
+     :issue_comment_url
+     "https://api.github.com/repos/redbadger/karma-tracker/issues/comments{/number}",
+     :git_refs_url
+     "https://api.github.com/repos/redbadger/karma-tracker/git/refs{/sha}",
+     :clone_url "https://github.com/redbadger/karma-tracker.git",
+     :contents_url
+     "https://api.github.com/repos/redbadger/karma-tracker/contents/{+path}",
+     :has_downloads true,
+     :teams_url
+     "https://api.github.com/repos/redbadger/karma-tracker/teams",
+     :has_issues true,
+     :issue_events_url
+     "https://api.github.com/repos/redbadger/karma-tracker/issues/events{/number}",
+     :private true,
+     :watchers_count 1,
+     :collaborators_url
+     "https://api.github.com/repos/redbadger/karma-tracker/collaborators{/collaborator}",
+     :homepage "",
+     :git_commits_url
+     "https://api.github.com/repos/redbadger/karma-tracker/git/commits{/sha}",
+     :name "karma-tracker",
+     :releases_url
+     "https://api.github.com/repos/redbadger/karma-tracker/releases{/id}",
+     :milestones_url
+     "https://api.github.com/repos/redbadger/karma-tracker/milestones{/number}",
+     :svn_url "https://github.com/redbadger/karma-tracker",
+     :merges_url
+     "https://api.github.com/repos/redbadger/karma-tracker/merges",
+     :compare_url
+     "https://api.github.com/repos/redbadger/karma-tracker/compare/{base}...{head}",
+     :stargazers_count 1,
+     :tags_url
+     "https://api.github.com/repos/redbadger/karma-tracker/tags",
+     :statuses_url
+     "https://api.github.com/repos/redbadger/karma-tracker/statuses/{sha}",
+     :notifications_url
+     "https://api.github.com/repos/redbadger/karma-tracker/notifications{?since,all,participating}",
+     :open_issues 2,
+     :has_wiki true,
+     :size 98,
+     :assignees_url
+     "https://api.github.com/repos/redbadger/karma-tracker/assignees{/user}",
+     :commits_url
+     "https://api.github.com/repos/redbadger/karma-tracker/commits{/sha}",
+     :labels_url
+     "https://api.github.com/repos/redbadger/karma-tracker/labels{/name}",
+     :forks_url
+     "https://api.github.com/repos/redbadger/karma-tracker/forks",
+     :contributors_url
+     "https://api.github.com/repos/redbadger/karma-tracker/contributors",
+     :updated_at "2017-01-26T15:31:11Z",
+     :pulls_url
+     "https://api.github.com/repos/redbadger/karma-tracker/pulls{/number}",
+     :has_pages false,
+     :default_branch "master",
+     :language "Clojure",
+     :comments_url
+     "https://api.github.com/repos/redbadger/karma-tracker/comments{/number}",
+     :id 80008322,
+     :stargazers_url
+     "https://api.github.com/repos/redbadger/karma-tracker/stargazers",
+     :issues_url
+     "https://api.github.com/repos/redbadger/karma-tracker/issues{/number}",
+     :trees_url
+     "https://api.github.com/repos/redbadger/karma-tracker/git/trees{/sha}",
+     :events_url
+     "https://api.github.com/repos/redbadger/karma-tracker/events",
+     :branches_url
+     "https://api.github.com/repos/redbadger/karma-tracker/branches{/branch}",
+     :url "https://api.github.com/repos/redbadger/karma-tracker",
+     :downloads_url
+     "https://api.github.com/repos/redbadger/karma-tracker/downloads",
+     :forks 0,
+     :subscribers_url
+     "https://api.github.com/repos/redbadger/karma-tracker/subscribers",
+     :full_name "redbadger/karma-tracker",
+     :blobs_url
+     "https://api.github.com/repos/redbadger/karma-tracker/git/blobs{/sha}",
+     :subscription_url
+     "https://api.github.com/repos/redbadger/karma-tracker/subscription",
+     :fork false,
+     :deployments_url
+     "https://api.github.com/repos/redbadger/karma-tracker/deployments",
+     :pushed_at "2017-01-30T11:25:42Z",
+     :owner
+     {:html_url "https://github.com/redbadger",
+      :gravatar_id "",
+      :followers_url
+      "https://api.github.com/users/redbadger/followers",
+      :subscriptions_url
+      "https://api.github.com/users/redbadger/subscriptions",
+      :site_admin false,
+      :following_url
+      "https://api.github.com/users/redbadger/following{/other_user}",
+      :type "Organization",
+      :received_events_url
+      "https://api.github.com/users/redbadger/received_events",
+      :login "redbadger",
+      :organizations_url
+      "https://api.github.com/users/redbadger/orgs",
+      :id 265650,
+      :events_url
+      "https://api.github.com/users/redbadger/events{/privacy}",
+      :url "https://api.github.com/users/redbadger",
+      :repos_url "https://api.github.com/users/redbadger/repos",
+      :starred_url
+      "https://api.github.com/users/redbadger/starred{/owner}{/repo}",
+      :gists_url
+      "https://api.github.com/users/redbadger/gists{/gist_id}",
+      :avatar_url
+      "https://avatars.githubusercontent.com/u/265650?v=3"},
+     :git_tags_url
+     "https://api.github.com/repos/redbadger/karma-tracker/git/tags{/sha}",
+     :created_at "2017-01-25T11:27:52Z",
+     :mirror_url nil}},
+   :diff_url
+   "https://github.com/redbadger/karma-tracker/pull/6.diff",
+   :comments_url
+   "https://api.github.com/repos/redbadger/karma-tracker/issues/6/comments",
+   :locked false,
+   :id 103709736,
+   :url
+   "https://api.github.com/repos/redbadger/karma-tracker/pulls/6",
+   :base
+   {:label "redbadger:master",
+    :ref "master",
+    :sha "837d286608eb3a74c525b1cd858ba8625130084d",
+    :user
+    {:html_url "https://github.com/redbadger",
+     :gravatar_id "",
+     :followers_url
+     "https://api.github.com/users/redbadger/followers",
+     :subscriptions_url
+     "https://api.github.com/users/redbadger/subscriptions",
+     :site_admin false,
+     :following_url
+     "https://api.github.com/users/redbadger/following{/other_user}",
+     :type "Organization",
+     :received_events_url
+     "https://api.github.com/users/redbadger/received_events",
+     :login "redbadger",
+     :organizations_url
+     "https://api.github.com/users/redbadger/orgs",
+     :id 265650,
+     :events_url
+     "https://api.github.com/users/redbadger/events{/privacy}",
+     :url "https://api.github.com/users/redbadger",
+     :repos_url "https://api.github.com/users/redbadger/repos",
+     :starred_url
+     "https://api.github.com/users/redbadger/starred{/owner}{/repo}",
+     :gists_url
+     "https://api.github.com/users/redbadger/gists{/gist_id}",
+     :avatar_url
+     "https://avatars.githubusercontent.com/u/265650?v=3"},
+    :repo
+    {:html_url "https://github.com/redbadger/karma-tracker",
+     :description
+     "Open Source contributions' tracker for organisations",
+     :open_issues_count 2,
+     :watchers 1,
+     :ssh_url "git@github.com:redbadger/karma-tracker.git",
+     :hooks_url
+     "https://api.github.com/repos/redbadger/karma-tracker/hooks",
+     :archive_url
+     "https://api.github.com/repos/redbadger/karma-tracker/{archive_format}{/ref}",
+     :keys_url
+     "https://api.github.com/repos/redbadger/karma-tracker/keys{/key_id}",
+     :forks_count 0,
+     :languages_url
+     "https://api.github.com/repos/redbadger/karma-tracker/languages",
+     :git_url "git://github.com/redbadger/karma-tracker.git",
+     :issue_comment_url
+     "https://api.github.com/repos/redbadger/karma-tracker/issues/comments{/number}",
+     :git_refs_url
+     "https://api.github.com/repos/redbadger/karma-tracker/git/refs{/sha}",
+     :clone_url "https://github.com/redbadger/karma-tracker.git",
+     :contents_url
+     "https://api.github.com/repos/redbadger/karma-tracker/contents/{+path}",
+     :has_downloads true,
+     :teams_url
+     "https://api.github.com/repos/redbadger/karma-tracker/teams",
+     :has_issues true,
+     :issue_events_url
+     "https://api.github.com/repos/redbadger/karma-tracker/issues/events{/number}",
+     :private true,
+     :watchers_count 1,
+     :collaborators_url
+     "https://api.github.com/repos/redbadger/karma-tracker/collaborators{/collaborator}",
+     :homepage "",
+     :git_commits_url
+     "https://api.github.com/repos/redbadger/karma-tracker/git/commits{/sha}",
+     :name "karma-tracker",
+     :releases_url
+     "https://api.github.com/repos/redbadger/karma-tracker/releases{/id}",
+     :milestones_url
+     "https://api.github.com/repos/redbadger/karma-tracker/milestones{/number}",
+     :svn_url "https://github.com/redbadger/karma-tracker",
+     :merges_url
+     "https://api.github.com/repos/redbadger/karma-tracker/merges",
+     :compare_url
+     "https://api.github.com/repos/redbadger/karma-tracker/compare/{base}...{head}",
+     :stargazers_count 1,
+     :tags_url
+     "https://api.github.com/repos/redbadger/karma-tracker/tags",
+     :statuses_url
+     "https://api.github.com/repos/redbadger/karma-tracker/statuses/{sha}",
+     :notifications_url
+     "https://api.github.com/repos/redbadger/karma-tracker/notifications{?since,all,participating}",
+     :open_issues 2,
+     :has_wiki true,
+     :size 98,
+     :assignees_url
+     "https://api.github.com/repos/redbadger/karma-tracker/assignees{/user}",
+     :commits_url
+     "https://api.github.com/repos/redbadger/karma-tracker/commits{/sha}",
+     :labels_url
+     "https://api.github.com/repos/redbadger/karma-tracker/labels{/name}",
+     :forks_url
+     "https://api.github.com/repos/redbadger/karma-tracker/forks",
+     :contributors_url
+     "https://api.github.com/repos/redbadger/karma-tracker/contributors",
+     :updated_at "2017-01-26T15:31:11Z",
+     :pulls_url
+     "https://api.github.com/repos/redbadger/karma-tracker/pulls{/number}",
+     :has_pages false,
+     :default_branch "master",
+     :language "Clojure",
+     :comments_url
+     "https://api.github.com/repos/redbadger/karma-tracker/comments{/number}",
+     :id 80008322,
+     :stargazers_url
+     "https://api.github.com/repos/redbadger/karma-tracker/stargazers",
+     :issues_url
+     "https://api.github.com/repos/redbadger/karma-tracker/issues{/number}",
+     :trees_url
+     "https://api.github.com/repos/redbadger/karma-tracker/git/trees{/sha}",
+     :events_url
+     "https://api.github.com/repos/redbadger/karma-tracker/events",
+     :branches_url
+     "https://api.github.com/repos/redbadger/karma-tracker/branches{/branch}",
+     :url "https://api.github.com/repos/redbadger/karma-tracker",
+     :downloads_url
+     "https://api.github.com/repos/redbadger/karma-tracker/downloads",
+     :forks 0,
+     :subscribers_url
+     "https://api.github.com/repos/redbadger/karma-tracker/subscribers",
+     :full_name "redbadger/karma-tracker",
+     :blobs_url
+     "https://api.github.com/repos/redbadger/karma-tracker/git/blobs{/sha}",
+     :subscription_url
+     "https://api.github.com/repos/redbadger/karma-tracker/subscription",
+     :fork false,
+     :deployments_url
+     "https://api.github.com/repos/redbadger/karma-tracker/deployments",
+     :pushed_at "2017-01-30T11:25:42Z",
+     :owner
+     {:html_url "https://github.com/redbadger",
+      :gravatar_id "",
+      :followers_url
+      "https://api.github.com/users/redbadger/followers",
+      :subscriptions_url
+      "https://api.github.com/users/redbadger/subscriptions",
+      :site_admin false,
+      :following_url
+      "https://api.github.com/users/redbadger/following{/other_user}",
+      :type "Organization",
+      :received_events_url
+      "https://api.github.com/users/redbadger/received_events",
+      :login "redbadger",
+      :organizations_url
+      "https://api.github.com/users/redbadger/orgs",
+      :id 265650,
+      :events_url
+      "https://api.github.com/users/redbadger/events{/privacy}",
+      :url "https://api.github.com/users/redbadger",
+      :repos_url "https://api.github.com/users/redbadger/repos",
+      :starred_url
+      "https://api.github.com/users/redbadger/starred{/owner}{/repo}",
+      :gists_url
+      "https://api.github.com/users/redbadger/gists{/gist_id}",
+      :avatar_url
+      "https://avatars.githubusercontent.com/u/265650?v=3"},
+     :git_tags_url
+     "https://api.github.com/repos/redbadger/karma-tracker/git/tags{/sha}",
+     :created_at "2017-01-25T11:27:52Z",
+     :mirror_url nil}},
+   :_links
+   {:self
+    {:href
+     "https://api.github.com/repos/redbadger/karma-tracker/pulls/6"},
+    :html
+    {:href "https://github.com/redbadger/karma-tracker/pull/6"},
+    :issue
+    {:href
+     "https://api.github.com/repos/redbadger/karma-tracker/issues/6"},
+    :comments
+    {:href
+     "https://api.github.com/repos/redbadger/karma-tracker/issues/6/comments"},
+    :review_comments
+    {:href
+     "https://api.github.com/repos/redbadger/karma-tracker/pulls/6/comments"},
+    :review_comment
+    {:href
+     "https://api.github.com/repos/redbadger/karma-tracker/pulls/comments{/number}"},
+    :commits
+    {:href
+     "https://api.github.com/repos/redbadger/karma-tracker/pulls/6/commits"},
+    :statuses
+    {:href
+     "https://api.github.com/repos/redbadger/karma-tracker/statuses/9b7725aeaa3aa17851a354cb48f2515d7907eadb"}},
+   :body "",
+   :user
+   {:html_url "https://github.com/lazydevorg",
+    :gravatar_id "",
+    :followers_url
+    "https://api.github.com/users/lazydevorg/followers",
+    :subscriptions_url
+    "https://api.github.com/users/lazydevorg/subscriptions",
+    :site_admin false,
+    :following_url
+    "https://api.github.com/users/lazydevorg/following{/other_user}",
+    :type "User",
+    :received_events_url
+    "https://api.github.com/users/lazydevorg/received_events",
+    :login "lazydevorg",
+    :organizations_url
+    "https://api.github.com/users/lazydevorg/orgs",
+    :id 655705,
+    :events_url
+    "https://api.github.com/users/lazydevorg/events{/privacy}",
+    :url "https://api.github.com/users/lazydevorg",
+    :repos_url "https://api.github.com/users/lazydevorg/repos",
+    :starred_url
+    "https://api.github.com/users/lazydevorg/starred{/owner}{/repo}",
+    :gists_url
+    "https://api.github.com/users/lazydevorg/gists{/gist_id}",
+    :avatar_url
+    "https://avatars.githubusercontent.com/u/655705?v=3"},
+   :review_comments_url
+   "https://api.github.com/repos/redbadger/karma-tracker/pulls/6/comments",
+   :assignee nil,
+   :created_at "2017-01-30T10:29:50Z"}},
+ :public false,
+ :created_at "2017-01-30T11:35:09Z",
+ :org
+ {:id 265650,
+  :login "redbadger",
+  :gravatar_id "",
+  :url "https://api.github.com/orgs/redbadger",
+  :avatar_url "https://avatars.githubusercontent.com/u/265650?"}}
