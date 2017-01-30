@@ -2,7 +2,7 @@
 
 (def event-types {:IssuesEvent :issue
                   :PullRequestEvent :pullrequest
-                  :PullRequestReviewCommentEvent :pull-request-comment})})
+                  :PullRequestReviewCommentEvent :pull-request-comment})
 
 (defn get-event-type [type]
   (get event-types (keyword type)))
