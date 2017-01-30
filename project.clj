@@ -9,4 +9,5 @@
   :main ^:skip-aot karma-tracker.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
-             :test {:resource-paths ["resources-test"]}})
+             :test {:resource-paths ["resources-test"]}
+             :ci {:plugins [[test2junit "1.2.5" :exclusions [org.clojure/clojure]]]}})
