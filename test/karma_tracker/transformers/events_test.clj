@@ -6,7 +6,7 @@
 
 (deftest issue-event-transform
   (testing "Transforms a Github IssueEvent into an event map"
-    (let [input-file (-> "issue-event-transformer.edn" io/resource io/file)
+    (let [input-file (-> "issue-event.edn" io/resource io/file)
           input-issue (-> input-file slurp edn/read-string)
           expected-event {:action "closed"
                           :type :issue
@@ -17,7 +17,7 @@
 
 (deftest pr-event-transform
   (testing "Transforms a Github PullRequestEvent into an event map"
-    (let [input-file (-> "pr-event-transformer.edn" io/resource io/file)
+    (let [input-file (-> "pr-event.edn" io/resource io/file)
           input-pr   (-> input-file slurp edn/read-string)
           expected-pr {:action "closed"
                        :type :pullrequest
