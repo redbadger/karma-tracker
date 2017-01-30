@@ -11,8 +11,10 @@
         repo-id     (-> event :repo :id)
         repo-name   (-> event :repo :name)
         user-id     (-> event :actor :id)
-        user-login  (-> event :actor :login)]
+        user-login  (-> event :actor :login)
+        created-at  (-> event :created_at)]
     {:type event-type
      :action action
      :repo {:id repo-id :name repo-name}
-     :user {:id user-id :login user-login}}))
+     :user {:id user-id :login user-login}
+     :created_at created-at}))
