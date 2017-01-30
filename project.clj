@@ -8,4 +8,5 @@
                  [com.github.raynes/tentacles "0e16d9f"]]
   :main ^:skip-aot karma-tracker.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}
+             :test {:resource-paths ["resources-test"]}})

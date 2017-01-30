@@ -1,0 +1,74 @@
+{:id "5218163368",
+ :type "IssuesEvent",
+ :actor
+ {:id 810438,
+  :login "gaearon",
+  :display_login "gaearon",
+  :gravatar_id "",
+  :url "https://api.github.com/users/gaearon",
+  :avatar_url "https://avatars.githubusercontent.com/u/810438?"},
+ :repo
+ {:id 10270250,
+  :name "facebook/react",
+  :url "https://api.github.com/repos/facebook/react"},
+ :payload
+ {:action "closed",
+  :issue
+  {:html_url "https://github.com/facebook/react/issues/8873",
+   :labels [],
+   :assignees [],
+   :closed_at "2017-01-26T15:50:15Z",
+   :number 8873,
+   :milestone nil,
+   :repository_url "https://api.github.com/repos/facebook/react",
+   :comments 1,
+   :state "closed",
+   :title "Maintaining ref prop through React.cloneElement()",
+   :labels_url
+   "https://api.github.com/repos/facebook/react/issues/8873/labels{/name}",
+   :updated_at "2017-01-26T15:50:15Z",
+   :comments_url
+   "https://api.github.com/repos/facebook/react/issues/8873/comments",
+   :locked false,
+   :id 203400710,
+   :events_url
+   "https://api.github.com/repos/facebook/react/issues/8873/events",
+   :url "https://api.github.com/repos/facebook/react/issues/8873",
+   :body
+   "React's [0.13 RC](https://facebook.github.io/react/blog/2015/03/03/react-v0.13-rc2.html) suggests that `ref` prop on components pushed through `React.cloneElement()` will allow for two parents to maintain `ref` props to the same child.\r\n\r\nI've tried to replicate this behaviour in a [CodePen](http://codepen.io/pvienneau/pen/PWJjKq), but I am not able to maintain two `ref` references to the same child (ie the ancestor component's `ref` gets nulled).\r\n\r\nHere is the jist of the code, working code found [here](http://codepen.io/pvienneau/pen/PWJjKq):\r\n\r\n```\r\nclass ChildComponent extends React.Component{\r\n  constructor(props){\r\n    super(props);   \r\n  \r\n    this.onClick = this.onClick.bind(this);\r\n    this.extendsChildren = this.extendChildren(this);\r\n  }\r\n  \r\n  onClick(e) {\r\n    e.preventDefault();\r\n    \r\n    try{\r\n      alert(this._input.value);\r\n    }catch(e){\r\n      alert('ref broken :(');\r\n    }\r\n  }\r\n  \r\n  extendChildren(){\r\n    return React.Children.map(this.props.children, child => {\r\n      return React.cloneElement(\r\n        child,\r\n        {\r\n          ref: ref => this._input = ref\r\n        }\r\n      );\r\n    });\r\n  }\r\n  \r\n  render() {\r\n    return(\r\n      <div>\r\n      <button onClick={this.onClick}>\r\n        ChildComponent ref check\r\n      </button>\r\n      {this.extendChildren()}\r\n    </div>\r\n    );\r\n  }\r\n}\r\n\r\n\r\nclass AncestorComponent extends React.Component{\r\n  constructor(props){\r\n    super(props);\r\n    \r\n    this.onClick = this.onClick.bind(this);\r\n  }\r\n  \r\n  onClick(e) {\r\n    e.preventDefault();\r\n    \r\n    try{\r\n      alert(this._input.value);\r\n    }catch(e){\r\n      alert('ref broken :(');\r\n    }\r\n    \r\n  }\r\n  \r\n  render() {\r\n    return (\r\n    <div>\r\n        <p>\r\n          The expected behaviour is that I should be able to click on both Application and ChildComponent check buttons and have a reference to the input (poping an alert with the input's value).\r\n        </p>\r\n      <button onClick={this.onClick}>\r\n        Ancestor ref check\r\n      </button>\r\n      <ChildComponent>\r\n        <input ref={ref => this._input = ref} defaultValue=\"Hello World\"/>\r\n      </ChildComponent>\r\n    </div>\r\n    );\r\n  }\r\n}\r\n```\r\n\r\nHas this behaviour been dropped/never implemented since the above RC? Or am I doing something wrong?",
+   :user
+   {:html_url "https://github.com/pvienneau",
+    :gravatar_id "",
+    :followers_url
+    "https://api.github.com/users/pvienneau/followers",
+    :subscriptions_url
+    "https://api.github.com/users/pvienneau/subscriptions",
+    :site_admin false,
+    :following_url
+    "https://api.github.com/users/pvienneau/following{/other_user}",
+    :type "User",
+    :received_events_url
+    "https://api.github.com/users/pvienneau/received_events",
+    :login "pvienneau",
+    :organizations_url "https://api.github.com/users/pvienneau/orgs",
+    :id 4933086,
+    :events_url
+    "https://api.github.com/users/pvienneau/events{/privacy}",
+    :url "https://api.github.com/users/pvienneau",
+    :repos_url "https://api.github.com/users/pvienneau/repos",
+    :starred_url
+    "https://api.github.com/users/pvienneau/starred{/owner}{/repo}",
+    :gists_url
+    "https://api.github.com/users/pvienneau/gists{/gist_id}",
+    :avatar_url
+    "https://avatars.githubusercontent.com/u/4933086?v=3"},
+   :assignee nil,
+   :created_at "2017-01-26T15:30:01Z"}},
+ :public true,
+ :created_at "2017-01-26T15:50:20Z",
+ :org
+ {:id 69631,
+  :login "facebook",
+  :gravatar_id "",
+  :url "https://api.github.com/orgs/facebook",
+  :avatar_url "https://avatars.githubusercontent.com/u/69631?"}}
