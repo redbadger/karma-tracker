@@ -1,7 +1,7 @@
 (ns karma-tracker.transformers.events)
 
-(def event-types {:IssuesEvent "issue"
-                  :PullRequestEvent "pullrequest"})
+(def event-types {:IssuesEvent :issue
+                  :PullRequestEvent :pullrequest})
 
 (defn get-event-type [type]
   (get event-types (keyword type)))
