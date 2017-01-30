@@ -6,8 +6,8 @@
   :repositories [["jitpack" "https://jitpack.io"]]
   :dependencies [[org.clojure/clojure "1.9.0-alpha14"]
                  [com.github.raynes/tentacles "0e16d9f"]]
-  :plugins [[test2junit "1.2.5" :exclusions [org.clojure/clojure]]]
   :main ^:skip-aot karma-tracker.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
-             :test {:resource-paths ["resources-test"]}})
+             :test {:resource-paths ["resources-test"]}
+             :ci {:plugins [[test2junit "1.2.5" :exclusions [org.clojure/clojure]]]}})

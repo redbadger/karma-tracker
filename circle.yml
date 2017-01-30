@@ -2,6 +2,6 @@ test:
   pre:
     - mkdir $CIRCLE_TEST_REPORTS/lein
   override:
-    - lein test2junit:
+    - lein with-profiles ci test2junit:
         environment:
           TEST2JUNIT_OUTPUT_DIR: $CIRCLE_TEST_REPORTS/lein
