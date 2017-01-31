@@ -5,11 +5,14 @@
             :url  "https://www.gnu.org/licenses/gpl-3.0.en.html"}
   :repositories [["jitpack" "https://jitpack.io"]]
   :dependencies [[com.github.raynes/tentacles "0e16d9f"]
+                 [com.novemberain/monger "3.1.0"]
                  [environ "1.1.0"]
                  [org.clojure/clojure "1.9.0-alpha14"]]
   :plugins [[lein-environ "1.1.0"]]
   :main ^:skip-aot karma-tracker.core
   :target-path "target/%s"
+  :env {:mongodb-uri "mongodb://127.0.0.1:27017/karma-tracker"}
   :profiles {:uberjar {:aot :all}
-             :test {:resource-paths ["resources-test"]}
+             :test {:resource-paths ["resources-test"]
+                    :env {:mongodb-uri "mongodb://127.0.0.1:27017/karma-tracker-test"}}
              :ci {:plugins [[test2junit "1.2.5" :exclusions [org.clojure/clojure]]]}})
