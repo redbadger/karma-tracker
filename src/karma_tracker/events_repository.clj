@@ -66,4 +66,5 @@
 (defn connect
   "Connects to MongoDB and returns the database client."
   ([] (connect (env :mongodb-uri)))
-  ([uri] (:db (mongo/connect-via-uri uri))))
+  ([uri] (doto (:db (mongo/connect-via-uri uri))
+               (collection/ensure-index events-collection {:created_at 1}))))
