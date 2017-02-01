@@ -7,8 +7,7 @@
 
 (defn clean-db [f]
   (database/drop-db db)
-  (f)
-  (database/drop-db db))
+  (f))
 
 (use-fixtures :each clean-db)
 
