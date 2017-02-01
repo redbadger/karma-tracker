@@ -2,6 +2,8 @@
   (:require [monger.core :as mongo]
             [monger.collection :as collection]
             monger.joda-time
+            [clj-time.core :refer [with-time-at-start-of-day]]
+            [clj-time.coerce :refer [to-date-time]]
             [clj-time.format :as format]
             [clojure.walk :refer [postwalk]]
             [clojure.set :refer [rename-keys]]
@@ -46,7 +48,8 @@
 
 (defprotocol EventsRepository
   (add [_ events] "Saves events.")
-  (fetch [_ start finish] "Loads events that occurred within the specified time period [start, finish)."))
+  (fetch [_ start finish] "Loads events that occurred within the specified time period.
+                           start and finish are dates (not date-times)."))
 
 (extend-type DB
   EventsRepository
@@ -61,7 +64,10 @@
 
   (fetch [db start finish]
     (map #(rename-keys % {:_id :id})
-         (collection/find-maps db events-collection {:created_at {"$gte" start, "$lt" finish}}))))
+         (collection/find-maps db events-collection
+                               {:created_at
+                                 {"$gte" (-> start to-date-time with-time-at-start-of-day)
+                                  "$lte" (-> finish to-date-time .millisOfDay .withMaximumValue)}}))))
 
 (defn connect
   "Connects to MongoDB and returns the database client."

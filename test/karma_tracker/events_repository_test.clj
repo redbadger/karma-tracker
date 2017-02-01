@@ -3,7 +3,7 @@
             [karma-tracker.events-repository :refer :all]
             [monger.db :as database]
             [monger.collection :as collection]
-            [clj-time.core :refer [date-time]]))
+            [clj-time.core :refer [date-time local-date]]))
 
 (def db (connect))
 
@@ -46,7 +46,7 @@
            {:id 99, :created_at "2018-01-01T00:00:00Z"}])
   (is (= [{:id 42, :created_at (date-time 2017 01 01 00 00 00)}
           {:id 50, :created_at (date-time 2017 12 31 23 59 59)}]
-         (fetch db (date-time 2017 01 01) (date-time 2018 01 01)))))
+         (fetch db (local-date 2017 01 01) (local-date 2017 12 31)))))
 
 (deftest creates-index
   (let [index-keys (map :key (collection/indexes-on db events-collection))]
