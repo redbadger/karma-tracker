@@ -27,19 +27,18 @@
    (new-connection (env :github-user) (env :github-token) {})))
 
 (defn organisation-performed-events [conn organisation-name]
-  (let [members (->> organisation-name
-                     (organisation-members conn)
-                     (map :login))]
-    (mapcat (partial performed-events conn) members)))
+  (->> organisation-name
+       (organisation-members conn)
+       (map :login)
+       (mapcat (partial performed-events conn))))
 
 (comment
   (def events
     (let [conn (new-connection)]
       (organisation-performed-events conn "redbadger")))
 
-  (nth events 200)
-
-  (e/normalize (nth events 200))
+  (nth events 5)
+  (nth (sequence e/transform events) 5)
 
   (require '[karma-tracker.transformers.events :as e]
            '[karma-tracker.report :as r])

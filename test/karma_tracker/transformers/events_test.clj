@@ -8,10 +8,11 @@
   (testing "Transforms a Github IssueEvent into an event map"
     (let [input-file (-> "issue-event.edn" io/resource io/file)
           input-issue (-> input-file slurp edn/read-string)
-          expected-event {:action "closed"
-                          :type :issue
-                          :repo {:name "facebook/react" :id 10270250}
-                          :user {:login "gaearon" :id 810438}
+          expected-event {:type :issue
+                          :repo {:name "facebook/react"
+                                 :url "https://api.github.com/repos/facebook/react"}
+                          :user {:login "gaearon"
+                                 :url "https://api.github.com/users/gaearon"}
                           :created-at "2017-01-26T15:50:20Z"}]
       (is (= expected-event (normalize input-issue))))))
 

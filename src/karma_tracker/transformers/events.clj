@@ -3,8 +3,9 @@
 (def types {"PullRequestEvent"              :pull-request
             "PullRequestReviewEvent"        :pull-request-review
             "PullRequestReviewCommentEvent" :pull-request-review-comment
-            "IssueEvent"                    :issue
-            "IssueCommentEvent"             :issue-comment})
+            "IssuesEvent"                   :issue
+            "IssueCommentEvent"             :issue-comment
+            "PushEvent"                     :push})
 
 (defn get-type [type]
   (get types type))
@@ -13,19 +14,11 @@
   (let [valid-types (-> types keys set)]
     #(contains? valid-types (:type %))))
 
-(defn normalize [event]
-  (let [type (-> event :type get-type)
-        action     (-> event :payload :action)
-        repo-id     (-> event :repo :id)
-        repo-name   (-> event :repo :name)
-        user-id     (-> event :actor :id)
-        user-login  (-> event :actor :login)
-        created-at  (-> event :created_at)]
-    {:type type
-     :action action
-     :repo {:id repo-id :name repo-name}
-     :user {:id user-id :login user-login}
-     :created-at created-at}))
+(defn normalize [{:keys [type repo actor created_at] :as event}]
+  (merge {:type       (get-type type)
+          :created-at created_at
+          :repo       (select-keys repo [:name :url])
+          :user       (select-keys actor [:login :url])}))
 
 (def transform
   (comp (filter valid?)
