@@ -16,6 +16,13 @@
                     (:user event)])
                  events)))
 
+(defn orgs [events]
+  (apply hash-map
+         (mapcat (fn [event]
+                   [(get-in event [:org :login])
+                    (:org event)])
+                 events)))
+
 (defn users-repos [events]
   (reduce (fn [report event]
             (update report
@@ -34,6 +41,15 @@
           {}
           events))
 
+(defn overall-activity-stats [events]
+  (let [stat-inc #(if (nil? %) 0 (inc %))]
+    (reduce (fn [stats event]
+              (update stats
+                      (:type event)
+                      stat-inc))
+            {}
+            events)))
+
 (defn report-builder [& {:as reducers-map}]
   (fn [base-report events]
     (merge base-report
@@ -43,8 +59,10 @@
                           reducers-map)))))
 
 (def build-report
-  (report-builder :users users
+  (report-builder :overall-activity-stats overall-activity-stats
+                  :users users
                   :repos repos
+                  :orgs orgs
                   :users-repos users-repos
                   :repos-users repos-users))
 
