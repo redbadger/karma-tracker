@@ -8,7 +8,7 @@ Open source contributions' tracker for organisations
 ## Running MongoDB
 
 The app and tests need to connect to a MongoDB instance.
-If you do not have one running locally, you can use Docker:
+If you do not have one running locally, you can use the [official Docker image](https://hub.docker.com/_/mongo/):
 
 ```shell
 $ docker-compose up -d
