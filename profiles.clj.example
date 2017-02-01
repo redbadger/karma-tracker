@@ -1,2 +1,2 @@
-{:dev {:github {:user "USER"
-                :token "TOKEN"}}}
+{:dev {:env {:github-user "USER"
+             :github-token "TOKEN"}}}
