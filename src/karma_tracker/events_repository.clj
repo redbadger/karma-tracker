@@ -5,6 +5,23 @@
             [environ.core :refer [env]])
   (:import [com.mongodb DB]))
 
+
+(comment "Download and save events:"
+  (require '[karma-tracker.github :as github]
+           '[karma-tracker.events-repository :as repo])
+
+  (def client (github/new-connection))
+  (def db (repo/connect))
+
+  (defn fetch-users [organisation]
+    (map :login (github/organisation-members client organisation)))
+
+  (defn fetch-events [organisation]
+    (mapcat (partial github/performed-events client) (fetch-users organisation)))
+
+  (repo/add db (fetch-events "redbadger")))
+
+
 (def events-collection "events")
 
 (defprotocol EventsRepository
