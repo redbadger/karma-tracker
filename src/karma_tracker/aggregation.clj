@@ -30,12 +30,25 @@
   (if (nil? value) 1 (inc value)))
 
 (defn- activity-stats [events]
-  (reduce (fn [stats event]
-            (update stats
-                    (:type event)
-                    activity-stats-inc))
-          {}
-          events))
+  (merge
+   (reduce (fn [stats event]
+             (update stats
+                     (:type event)
+                     activity-stats-inc))
+           {}
+           events)
+   (commits-stats events)))
+
+(defn- count-commits [events]
+  (->> events
+       (map :commits)
+       (remove nil?)
+       (reduce +)))
+
+(defn- commits-stats [events]
+  (let [commits (count-commits events)]
+    (when (> commits 0)
+      {:commits commits})))
 
 (defn overall-activity-stats [events]
   (activity-stats events))
@@ -55,11 +68,11 @@
                    reducers-map))))
 
 (def default-aggregators {:overall-activity-stats overall-activity-stats
-                          :repos-activity-stats repos-activity-stats
-                          :users users
-                          :repos repos
-                          :users-repos users-repos
-                          :repos-users repos-users})
+                          :repos-activity-stats   repos-activity-stats
+                          :users                  users
+                          :repos                  repos
+                          :users-repos            users-repos
+                          :repos-users            repos-users})
 
 (def aggregate
   (make-aggregator default-aggregators))
