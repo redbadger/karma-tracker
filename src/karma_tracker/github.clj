@@ -2,7 +2,8 @@
   (:require [environ.core :refer [env]]
             [tentacles
              [events :as events]
-             [orgs :as orgs]]))
+             [orgs :as orgs]
+             [repos :as repos]]))
 
 (defprotocol ClientProtocol
   (organisation-members [conn organisation])
@@ -37,10 +38,13 @@
     (let [conn (new-connection)]
       (organisation-performed-events conn "redbadger")))
 
+  (require '[karma-tracker.transformers.events :as e]
+           '[karma-tracker.aggregation :as a])
+
   (nth events 5)
   (nth (sequence e/transform events) 5)
+  (repos/languages "redbadger" "website-honestly")
 
-  (require '[karma-tracker.transformers.events :as e]
-           '[karma-tracker.report :as r])
-  (let [events (sequence e/transform events)]
-    (r/build-report (r/new-report "redbadger" 1 2) events)))
+  (->> events
+       (sequence e/transform)
+       a/aggregate))

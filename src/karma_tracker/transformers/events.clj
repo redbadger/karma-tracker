@@ -16,9 +16,9 @@
 
 (defn normalize [{:keys [type repo actor created_at] :as event}]
   (merge {:type       (get-type type)
-          :created-at created_at
-          :repo       (select-keys repo [:name :url])
-          :user       (select-keys actor [:login :url])}))
+          :repo       (:name repo)
+          :user       (:login actor)
+          :created-at created_at}))
 
 (def transform
   (comp (filter valid?)
