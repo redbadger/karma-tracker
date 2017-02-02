@@ -6,13 +6,11 @@
 
 (deftest issue-event-transform
   (testing "Transforms a Github IssueEvent into an event map"
-    (let [input-file (-> "issue-event.edn" io/resource io/file)
-          input-issue (-> input-file slurp edn/read-string)
-          expected-event {:type :issue
-                          :repo {:name "facebook/react"
-                                 :url "https://api.github.com/repos/facebook/react"}
-                          :user {:login "gaearon"
-                                 :url "https://api.github.com/users/gaearon"}
+    (let [input-file     (-> "event-transformer.edn" io/resource io/file)
+          input-issue    (-> input-file slurp edn/read-string)
+          expected-event {:type       :issue
+                          :repo       "facebook/react"
+                          :user       "gaearon"
                           :created-at "2017-01-26T15:50:20Z"}]
       (is (= expected-event (normalize input-issue))))))
 
