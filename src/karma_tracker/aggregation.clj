@@ -47,19 +47,19 @@
                  [type (activity-stats events)]))
        (apply hash-map)))
 
-(defn make-aggregator [& {:as reducers-map}]
+(defn make-aggregator [reducers-map]
   (fn [events]
     (apply hash-map
            (mapcat (fn [[name reducer]]
                      [name (reducer events)])
                    reducers-map))))
 
-(def default-aggregators [:overall-activity-stats overall-activity-stats
+(def default-aggregators {:overall-activity-stats overall-activity-stats
                           :repos-activity-stats repos-activity-stats
                           :users users
                           :repos repos
                           :users-repos users-repos
-                          :repos-users repos-users])
+                          :repos-users repos-users})
 
 (def aggregate
-  (apply make-aggregator default-aggregators))
+  (make-aggregator default-aggregators))
