@@ -3,6 +3,26 @@
             [clojure.string :as s]
             [tentacles.core :as tc]))
 
+(defn repos-contributions-chart [aggregation]
+  (->> aggregation
+       :repos-activity-stats
+       (mapcat (fn [[repo-name stats]]
+                 [repo-name (->> stats vals (reduce +))]))
+       (apply hash-map)
+       map-vals->percentage
+       map-vals->rank
+       (assoc aggregation :repos-contributions-chart)))
+
+(->> repo
+     overall-activity-chart)
+
+(defn overall-activity-chart [aggregation]
+  (->> aggregation
+       :overall-activity-stats
+       map-vals->percentage
+       map-vals->rank
+       (assoc aggregation :overall-activity-chart)))
+
 (defn load-languages [github-conn repos]
   (->> repos
        (map (fn [repo]
@@ -33,7 +53,7 @@
         convert (partial convert-to-percentage total)]
     (->> _map
          (mapcat (fn [[key value]]
-                   [key (convert value)]))
+                   [key [value (convert value)]]))
          (apply hash-map))))
 
 (defn- map-vals->rank [_map]
