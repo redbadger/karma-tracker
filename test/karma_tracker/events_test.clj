@@ -24,20 +24,18 @@
 (deftest pr-comment-event-transform
   (testing "Transforms a Github PullRequestReviewCommentEvent into an event map"
     (let [input-event    (load-event "pr-comment-event")
-          expected-event {:action     "created"
-                          :type       :pull-request-comment
-                          :repo       {:name "redbadger/karma-tracker" :id 80008322}
-                          :user       {:login "mveritym" :id 1009524}
+          expected-event {:type       :pull-request-review-comment
+                          :repo       "redbadger/karma-tracker"
+                          :user       "mveritym"
                           :created-at "2017-01-30T11:35:09Z"}]
       (is (= expected-event (normalize input-event))))))
 
 (deftest pr-event-transform
   (testing "Transforms a Github PullRequestEvent into an event map"
     (let [input-event    (load-event "pr-event")
-          expected-event {:action     "closed"
-                          :type       :pullrequest
-                          :repo       {:name "facebook/react-devtools" :id 12601374}
-                          :user       {:login "gaearon" :id 810438}
+          expected-event {:type       :pull-request
+                          :repo       "facebook/react-devtools"
+                          :user       "gaearon"
                           :created-at "2017-01-27T23:34:46Z"}]
       (is (= expected-event (normalize input-event))))))
 
