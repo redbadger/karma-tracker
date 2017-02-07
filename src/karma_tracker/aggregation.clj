@@ -1,6 +1,7 @@
 (ns karma-tracker.aggregation
-  (:require [karma-tracker.github :as gh]
-            [karma-tracker.transformers.events :as events]))
+  (:require [karma-tracker
+             [events :as events]
+             [github :as gh]]))
 
 (defn repos [events]
   (->> events (map :repo) set))

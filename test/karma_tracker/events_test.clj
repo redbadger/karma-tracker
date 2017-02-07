@@ -1,8 +1,9 @@
-(ns karma-tracker.transformers.events-test
-  (:require [clojure.test :refer :all]
-            [clojure.edn :as edn]
+(ns karma-tracker.events-test
+  (:require [clojure
+             [edn :as edn]
+             [test :refer :all]]
             [clojure.java.io :as io]
-            [karma-tracker.transformers.events :refer :all]))
+            [karma-tracker.events :refer :all]))
 
 (defn load-event [name]
   (-> (str name ".edn")

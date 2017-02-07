@@ -1,4 +1,4 @@
-(ns karma-tracker.transformers.events)
+(ns karma-tracker.events)
 
 (def types {"PullRequestEvent"              :pull-request
             "PullRequestReviewEvent"        :pull-request-review
