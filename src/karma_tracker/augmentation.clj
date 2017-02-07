@@ -7,6 +7,7 @@
   (* (double (/ value total)) 100))
 
 (defn- map-vals->percentage [_map]
+  "Convert the values of the map to percentage"
   (let [total (->> _map vals (reduce +))
         convert (partial convert-to-percentage total)]
     (->> _map
@@ -15,6 +16,7 @@
          (apply hash-map))))
 
 (defn- map-vals->rank [_map]
+  "Convert the map in a list sorted by the map values"
   (sort (fn [[_ value1] [_ value2]]
           (compare value2 value1))
         _map))
@@ -67,6 +69,9 @@
                          overall-activity-chart])
 
 (defn make-augment-fn
+  "It return the augmentation function composing the list of augmenters
+   functions passed as argument. Each of them has to require the GitHub
+   connection as first argument and the aggregated data as second."
   ([augmenters github-conn]
    (->> augmenters
         (map #(partial % github-conn))
@@ -76,6 +81,7 @@
    (make-augment-fn default-augmenters github-conn)))
 
 (defn augment [github-conn aggregation]
+  "Execute the augmentation with the default augmenters functions"
   (let [augment-fn (make-augment-fn default-augmenters github-conn)]
     (augment-fn aggregation)))
 
