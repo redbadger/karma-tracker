@@ -63,10 +63,10 @@
 
 (defn make-aggregator [reducers-map]
   (fn [events]
-    (apply hash-map
-           (mapcat (fn [[name reducer]]
-                     [name (reducer events)])
-                   reducers-map))))
+    (->> reducers-map
+         (mapcat (fn [[name reducer]]
+                   [name (reducer events)]))
+         (apply hash-map))))
 
 (def default-aggregators {:overall-activity-stats overall-activity-stats
                           :repos-activity-stats   repos-activity-stats
