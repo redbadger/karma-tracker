@@ -1,0 +1,98 @@
+{:payload
+ {:push_id 1540902175
+  :ref "refs/heads/no-scroll-fix"
+  :size 11
+  :head "626d00b7872e382d86d5b7c1663ae5ea7aec52f1"
+  :commits
+  [{:distinct false
+    :author {:email "dom@dmk.st", :name "Dominik Stodolny"}
+    :url
+    "https://api.github.com/repos/redbadger/blog-squarespace-template/commits/b3120befeda66ad56b4583964fc14cf7375d8826"
+    :sha "b3120befeda66ad56b4583964fc14cf7375d8826"
+    :message "fix open graph issue (#48)"}
+   {:distinct false
+    :author {:email "dom@dmk.st", :name "Dominik Stodolny"}
+    :url
+    "https://api.github.com/repos/redbadger/blog-squarespace-template/commits/62ccac4f1289c7944af97bd100b5d7179596f340"
+    :sha "62ccac4f1289c7944af97bd100b5d7179596f340"
+    :message "fix google maps pointing location (#47)"}
+   {:distinct false
+    :author {:email "dom@dmk.st", :name "Dominik Stodolny"}
+    :url
+    "https://api.github.com/repos/redbadger/blog-squarespace-template/commits/9c2406013e8cd0366a3a3ba7d77fc46b70053286"
+    :sha "9c2406013e8cd0366a3a3ba7d77fc46b70053286"
+    :message "fix tab navigation order (#49)"}
+   {:distinct false
+    :author {:email "dom@dmk.st", :name "Dominik Stodolny"}
+    :url
+    "https://api.github.com/repos/redbadger/blog-squarespace-template/commits/1fe7f89f72bb1634b3df3630d86cb98855e2dec2"
+    :sha "1fe7f89f72bb1634b3df3630d86cb98855e2dec2"
+    :message "fix image position on mobile (#50)"}
+   {:distinct false
+    :author {:email "dom@dmk.st", :name "Dominik Stodolny"}
+    :url
+    "https://api.github.com/repos/redbadger/blog-squarespace-template/commits/8676912514491bfd383febfe5c567a9c7d62e01a"
+    :sha "8676912514491bfd383febfe5c567a9c7d62e01a"
+    :message "fix iphone5 horizontal scrolling bug (#51)"}
+   {:distinct false
+    :author {:email "dom@dmk.st", :name "Dominik Stodolny"}
+    :url
+    "https://api.github.com/repos/redbadger/blog-squarespace-template/commits/713f8ae31b1e7f8a7fd14365349206d1666e8019"
+    :sha "713f8ae31b1e7f8a7fd14365349206d1666e8019"
+    :message "fix blog image shift issue (#52)"}
+   {:distinct false
+    :author {:email "bryves@gmail.com", :name "smeb"}
+    :url
+    "https://api.github.com/repos/redbadger/blog-squarespace-template/commits/ff624a8f2d18475f2e6e30599c43f6168bd1e5f1"
+    :sha "ff624a8f2d18475f2e6e30599c43f6168bd1e5f1"
+    :message "Removes links from screenreader"}
+   {:distinct false
+    :author {:email "karismafilms@gmail.com", :name "Alex Savin"}
+    :url
+    "https://api.github.com/repos/redbadger/blog-squarespace-template/commits/62cb529a53ac90982f51c2740b1576812c32b0b6"
+    :sha "62cb529a53ac90982f51c2740b1576812c32b0b6"
+    :message "De-capitalizing value of a CSS property"}
+   {:distinct false
+    :author {:email "karismafilms@gmail.com", :name "Alex Savin"}
+    :url
+    "https://api.github.com/repos/redbadger/blog-squarespace-template/commits/2b00e163ab3621fa5eace7511bcd0f0d743907a4"
+    :sha "2b00e163ab3621fa5eace7511bcd0f0d743907a4"
+    :message "Removing GA script as it is injected by Squarespace config now"}
+   {:distinct false
+    :author
+    {:email "asavin@users.noreply.github.com", :name "Alexander Savin"}
+    :url
+    "https://api.github.com/repos/redbadger/blog-squarespace-template/commits/55377676af53bd8f0f89cd1936ac229b545a8232"
+    :sha "55377676af53bd8f0f89cd1936ac229b545a8232"
+    :message
+    "Merge pull request #53 from redbadger/refactor-ga\n\nRemoving GA script as it is injected by Squarespace config now"}
+   {:distinct true
+    :author
+    {:email "asavin@users.noreply.github.com", :name "Alexander Savin"}
+    :url
+    "https://api.github.com/repos/redbadger/blog-squarespace-template/commits/626d00b7872e382d86d5b7c1663ae5ea7aec52f1"
+    :sha "626d00b7872e382d86d5b7c1663ae5ea7aec52f1"
+    :message "Merge branch 'master' into no-scroll-fix"}]
+  :distinct_size 1
+  :before "214bc410af7d11b791873dc11b9782446a59c3da"}
+ :public true
+ :type "PushEvent"
+ :org
+ {:gravatar_id ""
+  :login "redbadger"
+  :id 265650
+  :url "https://api.github.com/orgs/redbadger"
+  :avatar_url "https://avatars.githubusercontent.com/u/265650?"}
+ :id "5274133183"
+ :repo
+ {:name "redbadger/blog-squarespace-template"
+  :id 73203204
+  :url "https://api.github.com/repos/redbadger/blog-squarespace-template"}
+ :created_at "2017-02-06T17:09:51Z"
+ :actor
+ {:gravatar_id ""
+  :display_login "asavin"
+  :login "asavin"
+  :id 487468
+  :url "https://api.github.com/users/asavin"
+  :avatar_url "https://avatars.githubusercontent.com/u/487468?"}}
