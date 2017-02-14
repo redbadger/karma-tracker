@@ -12,7 +12,8 @@
   :plugins [[lein-environ "1.1.0"]]
   :main ^:skip-aot karma-tracker.core
   :target-path "target/%s"
-  :env {:mongodb-uri "mongodb://127.0.0.1:27017/karma-tracker"}
+  :env {:organisation "redbadger"
+        :mongodb-uri "mongodb://127.0.0.1:27017/karma-tracker"}
   :profiles {:uberjar {:aot :all}
              :test {:resource-paths ["resources-test"]
                     :env {:mongodb-uri "mongodb://127.0.0.1:27017/karma-tracker-test"}}

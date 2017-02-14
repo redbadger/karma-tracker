@@ -1,7 +1,12 @@
 (ns karma-tracker.core
-  (:gen-class))
+  (:gen-class)
+  (:require [karma-tracker
+             [cli :as cli]
+             [commands :as ex]
+             [resources :refer [get-resources]]]))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+(defn get-execution-fn []
+  (partial ex/execute (get-resources)))
+
+(defn -main [& args]
+  (cli/run (get-execution-fn) args))
