@@ -16,4 +16,9 @@
         (is (= [:events-updated]
                (execute fake-resources [:update])))
         (is (= [:gh :storage "redbadger"]
-               @update-events-result))))))
+               @update-events-result)))))
+  (testing "DB connection fails returns error"
+    (with-redefs [update-events (fn [& args]
+                                  (throw (com.mongodb.MongoTimeoutException. "")))]
+      (is (= [:error "Could not connect to MongoDB"]
+             (execute fake-resources [:update]))))))
