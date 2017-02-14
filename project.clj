@@ -5,7 +5,7 @@
             :url  "https://www.gnu.org/licenses/gpl-3.0.en.html"}
   :repositories [["jitpack" "https://jitpack.io"]]
   :dependencies [[com.github.raynes/tentacles "0e16d9f"]
-                 [com.novemberain/monger "3.1.0"]
+                 [com.github.michaelklishin/monger "6e333bb"]
                  [clj-time "0.13.0"]
                  [environ "1.1.0"]
                  [org.clojure/clojure "1.9.0-alpha14"]]
