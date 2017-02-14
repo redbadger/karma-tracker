@@ -9,9 +9,9 @@
 (defmethod execute :default [_ command]
   (throw (ex-info "Command not implemented" {:command command})))
 
-(defmacro with-db [& fns]
+(defmacro with-db [& body]
   `(try
-     ~@fns
+     ~@body
      (catch com.mongodb.MongoTimeoutException e#
        [:error "Could not connect to MongoDB"])))
 
