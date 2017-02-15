@@ -4,7 +4,10 @@
             [tentacles.core :as tc]))
 
 (defn- convert-to-percentage [total value]
-  (* (double (/ value total)) 100))
+  (->> (/ value total)
+       double
+       (* 100)
+       (format "%.1f%%")))
 
 (defn- map-vals->percentage [_map]
   "Convert the values of the map to percentage"
@@ -21,12 +24,22 @@
           (compare value2 value1))
         _map))
 
+(defn- rank->maps [rank]
+  "Convert every value from the vector to a map to allow the
+   template engine to read the values."
+  (map (fn [[item [value percentage]]]
+         {:item       item
+          :value      value
+          :percentage percentage})
+       rank))
+
 (defn- load-languages [github-conn repos]
   (->> repos
        (map (fn [repo]
               [repo (s/split repo #"\/")]))
        (map (fn [[full-name [user repo]]]
-              [full-name (gh/repo-languages github-conn user repo)]))
+              [full-name (gh/repo-languages github-conn user repo)
+               ]))
        (remove (fn [[full-name response]]
                  (gh/error-response? response)))
        (mapcat identity)
@@ -44,6 +57,10 @@
        (apply merge-with +)
        map-vals->percentage
        map-vals->rank
+       (take 10)
+       (map (fn [[language values]]
+              [(name language) values]))
+       rank->maps
        (assoc aggregation :languages-chart)))
 
 (defn repos-contributions-chart [_ aggregation]
@@ -54,19 +71,35 @@
        (apply hash-map)
        map-vals->percentage
        map-vals->rank
+       (take 20)
+       rank->maps
        (assoc aggregation :repos-contributions-chart)))
+
+(def contributions-type-labels {:commits                     "Commits"
+                                :push                        "Pushes"
+                                :issue-comment               "Issues' comments"
+                                :pull-request                "Pull requests"
+                                :issue                       "Issues"
+                                :pull-request-review-comment "Reviews' comments"})
 
 (defn overall-activity-chart [_ aggregation]
   (->> aggregation
        :overall-activity-stats
        map-vals->percentage
        map-vals->rank
+       (map (fn [[type values]]
+              [(get contributions-type-labels type) values]))
+       rank->maps
        (assoc aggregation :overall-activity-chart)))
+
+(defn report-data-cleaner [_ aggregation]
+  (-> aggregation))
 
 (def default-augmenters [repos-languages
                          languages-chart
                          repos-contributions-chart
-                         overall-activity-chart])
+                         overall-activity-chart
+                         report-data-cleaner])
 
 (defn make-augment-fn
   "It return the augmentation function composing the list of augmenters
@@ -86,17 +119,24 @@
     (augment-fn aggregation)))
 
 (comment
-  (require '[karma-tracker.transformers.events :as e]
+  (require '[karma-tracker.events :as e]
            '[karma-tracker.aggregation :as a]
-           '[karma-tracker.github :as gh])
+           '[karma-tracker.github :as gh]
+           '[karma-tracker.report :as r]
+           '[criterium.core :as c]
+           '[cljstache.core :refer [render-resource]])
+
+  (-> repo
+      r/generate-report
+      r/save-report)
 
   (def conn (gh/new-connection))
   (def events
-    (take 200 (gh/organisation-performed-events conn "redbadger")))
+    (gh/organisation-performed-events conn "redbadger"))
 
   (def repo (->> events
                  (sequence e/transform)
                  a/aggregate
                  (augment conn)))
 
-  (->> repo))
+  (->> repo :languages-chart))

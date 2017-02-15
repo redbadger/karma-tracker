@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Karma tracker report</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Karma report</h1>
+    <p>Description</p>
+    
+    <h2>Reporitories contributions (top 20)</h2>
+    <table id="repositories-contributions">
+      <tr>
+        <th>Name</th>
+        <th>Number</th>
+        <th>Percentage</th>
+      </tr>
+      {{#repos-contributions-chart}}
+      <tr>
+        <td>
+          <a href="https://github.com/{{item}}">{{item}}</a>
+        </td>
+        <td>{{value}}</td>
+        <td>{{percentage}}</td>
+      </tr>
+      {{/repos-contributions-chart}}
+    </table>
+
+    <h2>Contributions types</h2>
+    <table id="contributions-types">
+      <tr>
+        <th>Type</th>
+        <th>Number</th>
+        <th>Percentage</th>
+      </tr>
+      {{#overall-activity-chart}}
+      <tr>
+        <td>{{item}}</td>
+        <td>{{value}}</td>
+        <td>{{percentage}}</td>
+      </tr>
+      {{/overall-activity-chart}}
+    </table>
+
+    <h2>Languages chart (top 10)</h2>
+    <table id="languages-chart">
+      <tr>
+        <th>Languages</th>
+        <th>Percentage</th>
+      </tr>
+      {{#languages-chart}}
+      <tr>
+        <td>{{item}}</td>
+        <td>{{percentage}}</td>
+      </tr>
+      {{/languages-chart}}
+    </table>
+
+    <h2>Badgers</h2>
+    <ul>
+      {{#users}}
+        <li>{{.}}</li>
+      {{/users}}
+    </ul>
+  </body>
+</html>
