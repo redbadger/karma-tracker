@@ -17,4 +17,4 @@
   :profiles {:uberjar {:aot :all}
              :test {:resource-paths ["resources-test"]
                     :env {:mongodb-uri "mongodb://127.0.0.1:27017/karma-tracker-test"}}
-             :ci {:plugins [[lein-test-report-junit-xml "0.1.0" :exclusions [org.clojure/clojure]]]}})
+             :ci {:plugins [[lein-test-report-junit-xml "0.2.0"]]}})
