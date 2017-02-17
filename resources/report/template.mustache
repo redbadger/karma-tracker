@@ -6,8 +6,7 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>Karma report</h1>
-    <p>Description</p>
+    <h1>Karma report {{meta.data-month}}-{{meta.data-year}}</h1>
     
     <h2>Reporitories contributions (top 20)</h2>
     <table id="repositories-contributions">
@@ -46,7 +45,7 @@
     <h2>Languages chart (top 10)</h2>
     <table id="languages-chart">
       <tr>
-        <th>Languages</th>
+        <th>Language</th>
         <th>Percentage</th>
       </tr>
       {{#languages-chart}}
@@ -63,5 +62,7 @@
         <li>{{.}}</li>
       {{/users}}
     </ul>
+
+    <small>Created at {{meta.created}}</small>
   </body>
 </html>

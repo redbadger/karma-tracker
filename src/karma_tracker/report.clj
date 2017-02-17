@@ -1,15 +1,22 @@
 (ns karma-tracker.report
-  (:require [cljstache.core :refer [render-resource]]
-            [karma-tracker.events-repository :refer [get-events-for-month]]
-            [karma-tracker.events :refer [transform]]
-            [karma-tracker.aggregation :refer [aggregate]]
-            [karma-tracker.augmentation :refer [augment]]))
+  (:require [clj-time.core :refer [now]]
+            [cljstache.core :refer [render-resource]]
+            [karma-tracker
+             [aggregation :refer [aggregate]]
+             [augmentation :refer [augment]]
+             [events :refer [transform]]
+             [events-repository :refer [get-events-for-month]]]))
 
 (defn render [report-data]
   (render-resource "report/template.mustache" report-data))
 
-(defn save [report]
-  (spit "report.html" report))
+(defn save [report year month]
+  (spit (str "report-" year "-" month ".html") report))
+
+(defn add-meta-data [report year month]
+  (assoc report :meta {:created    (now)
+                       :data-year  year
+                       :data-month month}))
 
 (defn get-data [github-conn events-storage year month]
   (->> (get-events-for-month events-storage year month)
@@ -19,5 +26,6 @@
 
 (defn make-report [github-conn events-storage year month]
   (-> (get-data github-conn events-storage year month)
+      (add-meta-data year month)
       render
-      save))
+      (save year month)))
