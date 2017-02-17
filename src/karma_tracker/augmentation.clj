@@ -105,8 +105,17 @@
          rank->maps
          (assoc aggregation :overall-activity-chart))))
 
+(defn top-repos-users [_ aggregation]
+  (let [repos (top-repos aggregation)
+        users (set (apply concat (-> aggregation
+                                     :repos-users
+                                     (select-keys repos)
+                                     vals)))]
+    (assoc aggregation :top-repos-users users)))
+
 (def default-augmenters [repos-contributions-chart
                          overall-activity-chart
+                         top-repos-users
                          repos-languages
                          languages-chart])
 

@@ -58,9 +58,9 @@
 
     <h2>Badgers</h2>
     <ul>
-      {{#users}}
-        <li>{{.}}</li>
-      {{/users}}
+      {{#top-repos-users}}
+        <li><a href="https://github.com/{{.}}">{{.}}</a></li>
+      {{/top-repos-users}}
     </ul>
 
     <small>Created at {{meta.created}}</small>
