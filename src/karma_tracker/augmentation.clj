@@ -45,10 +45,13 @@
        (mapcat identity)
        (apply hash-map)))
 
+(defn- top-repos [aggregation]
+  (->> aggregation
+       :repos-contributions-chart
+       (map :item)))
+
 (defn repos-languages [github-conn aggregation]
-  (let [repos (->> aggregation
-                   :repos-contributions-chart
-                   (map :item))]
+  (let [repos (top-repos aggregation)]
     (assoc aggregation
            :repos-languages
            (load-languages github-conn repos))))
@@ -85,15 +88,22 @@
                                 :issue                       "Issues"
                                 :pull-request-review-comment "Reviews' comments"})
 
+(defn- top-repos-activity-stats [repos stats]
+  (->> repos
+       (select-keys stats)
+       vals
+       (apply merge-with +)))
+
 (defn overall-activity-chart [_ aggregation]
-  (->> aggregation
-       :overall-activity-stats
-       map-vals->percentage
-       map-vals->rank
-       (map (fn [[type values]]
-              [(get contributions-type-labels type) values]))
-       rank->maps
-       (assoc aggregation :overall-activity-chart)))
+  (let [repos (top-repos aggregation)
+        stats (top-repos-activity-stats repos (:repos-activity-stats aggregation))]
+    (->> stats
+         map-vals->percentage
+         map-vals->rank
+         (map (fn [[type values]]
+                [(get contributions-type-labels type) values]))
+         rank->maps
+         (assoc aggregation :overall-activity-chart))))
 
 (def default-augmenters [repos-contributions-chart
                          overall-activity-chart
