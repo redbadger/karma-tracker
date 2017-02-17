@@ -46,9 +46,12 @@
        (apply hash-map)))
 
 (defn repos-languages [github-conn aggregation]
-  (assoc aggregation
-         :repos-languages
-         (load-languages github-conn (:repos aggregation))))
+  (let [repos (->> aggregation
+                   :repos-contributions-chart
+                   (map :item))]
+    (assoc aggregation
+           :repos-languages
+           (load-languages github-conn repos))))
 
 (defn languages-chart [_ aggregation]
   (->> aggregation
@@ -92,14 +95,10 @@
        rank->maps
        (assoc aggregation :overall-activity-chart)))
 
-(defn report-data-cleaner [_ aggregation]
-  (-> aggregation))
-
-(def default-augmenters [repos-languages
-                         languages-chart
-                         repos-contributions-chart
+(def default-augmenters [repos-contributions-chart
                          overall-activity-chart
-                         report-data-cleaner])
+                         repos-languages
+                         languages-chart])
 
 (defn make-augment-fn
   "It return the augmentation function composing the list of augmenters
