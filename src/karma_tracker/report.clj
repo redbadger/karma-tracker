@@ -11,7 +11,8 @@
   (render-resource "report/template.mustache" report-data))
 
 (defn save [report year month]
-  (spit (str "report-" year "-" month ".html") report))
+  (spit (str "report-" year "-" month ".html") report)
+  report)
 
 (defn add-meta-data [report year month]
   (assoc report :meta {:created    (now)
