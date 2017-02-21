@@ -54,7 +54,7 @@
     (let [events (->> types keys (map (fn [type] {:type type})))
           results (map valid? events)]
       (is (every? true? results))))
-  (testing "Not defined type are not valid"
+  (testing "Not defined types are invalid"
     (let [events (->> ["ForkEvent" "GistEvent" "ReleaseEvent"]
                       (map (fn [type] {:type type})))
           results (map valid? events)]

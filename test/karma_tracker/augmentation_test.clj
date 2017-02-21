@@ -35,27 +35,28 @@
 
 (deftest augmentation-functions-test
   (with-redefs [repos/languages repo-languages-fake-fn]
-    (let [conn   (gh/new-connection)
-          result (augment conn aggregation)]
-      (is (= result
-             (merge aggregation
-                    {:repos-languages repo-languages-fake-response
+    (let [conn     (gh/new-connection)
+          result   (augment conn aggregation)
+          expected (merge aggregation
+                          {:repos-languages repo-languages-fake-response
 
-                     :languages-chart
-                     [[:Clojure [50000 43.59197907585004]]
-                      [:Elixir [43000 37.48910200523104]]
-                      [:Clojurescript [20000 17.43679163034002]]
-                      [:JavaScript [1000 0.8718395815170008]]
-                      [:HTML [500 0.4359197907585004]]
-                      [:Bash [200 0.1743679163034002]]]
+                           :languages-chart
+                           [{:item "Clojure", :value 50000, :percentage "43.6%"}
+                            {:item "Elixir", :value 43000, :percentage "37.5%"}
+                            {:item "Clojurescript", :value 20000, :percentage "17.4%"}
+                            {:item "JavaScript", :value 1000, :percentage "0.9%"}
+                            {:item "HTML", :value 500, :percentage "0.4%"}
+                            {:item "Bash", :value 200, :percentage "0.2%"}]
 
-                     :repos-contributions-chart
-                     [["hacker1/repo2" [4 44.44444444444444]]
-                      ["hacker3/repo1" [3 33.33333333333333]]
-                      ["hacker1/repo1" [2 22.22222222222222]]]
+                           :repos-contributions-chart
+                           [{:item "hacker1/repo2", :value 4, :percentage "44.4%"}
+                            {:item "hacker3/repo1", :value 3, :percentage "33.3%"}
+                            {:item "hacker1/repo1", :value 2, :percentage "22.2%"}]
 
-                     :overall-activity-chart
-                     [[:issue [3 33.33333333333333]]
-                      [:commits [3 33.33333333333333]]
-                      [:pull-request [2 22.22222222222222]]
-                      [:push [1 11.11111111111111]]]}))))))
+                           :overall-activity-chart
+                           [{:item "Issues", :value 3, :percentage "33.3%"}
+                            {:item "Commits", :value 3, :percentage "33.3%"}
+                            {:item "Pull requests", :value 2, :percentage "22.2%"}
+                            {:item "Pushes", :value 1, :percentage "11.1%"}]})]
+      (doseq [key (keys expected)]
+        (is (= (key result) (key expected)) (str "section: " key ", mismatched"))))))

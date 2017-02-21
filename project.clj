@@ -8,7 +8,8 @@
                  [com.github.michaelklishin/monger "6e333bb"]
                  [clj-time "0.13.0"]
                  [environ "1.1.0"]
-                 [org.clojure/clojure "1.9.0-alpha14"]]
+                 [org.clojure/clojure "1.9.0-alpha14"]
+                 [cljstache "2.0.0"]]
   :plugins [[lein-environ "1.1.0"]]
   :main ^:skip-aot karma-tracker.core
   :target-path "target/%s"

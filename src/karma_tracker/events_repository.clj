@@ -2,7 +2,7 @@
   (:require [monger.core :as mongo]
             [monger.collection :as collection]
             monger.joda-time
-            [clj-time.core :refer [with-time-at-start-of-day]]
+            [clj-time.core :refer [with-time-at-start-of-day] :as t]
             [clj-time.coerce :refer [to-date-time]]
             [clj-time.format :as format]
             [clojure.walk :refer [postwalk]]
@@ -13,21 +13,21 @@
 
 
 (comment "Download and save events:"
-  (require '[karma-tracker.github :as github]
-           '[karma-tracker.events-repository :as repo]
-           '[clj-time.core :refer [now weeks ago]])
+         (require '[karma-tracker.github :as github]
+                  '[karma-tracker.events-repository :as repo]
+                  '[clj-time.core :refer [now weeks ago]])
 
-  (def client (github/new-connection))
-  (def db (repo/connect))
+         (def client (github/new-connection))
+         (def db (repo/connect))
 
-  (defn fetch-users [organisation]
-    (map :login (github/organisation-members client organisation)))
+         (defn fetch-users [organisation]
+           (map :login (github/organisation-members client organisation)))
 
-  (defn fetch-events [organisation]
-    (mapcat (partial github/performed-events client) (fetch-users organisation)))
+         (defn fetch-events [organisation]
+           (mapcat (partial github/performed-events client) (fetch-users organisation)))
 
-  (repo/add db (fetch-events "redbadger"))
-  (repo/fetch db (-> 2 weeks ago) (now)))
+         (repo/add db (fetch-events "redbadger"))
+         (repo/fetch db (-> 2 weeks ago) (now)))
 
 
 (def events-collection "events")
@@ -39,7 +39,7 @@
   Returns the value unmodified if it cannot be parsed."
   [value]
   (try (format/parse date-time-format value)
-    (catch Exception _ value)))
+       (catch Exception _ value)))
 
 (defn parse-date-times
   "Traverses the given data structure and parses any date-time strings found within."
@@ -66,11 +66,22 @@
     (map #(rename-keys % {:_id :id})
          (collection/find-maps db events-collection
                                {:created_at
-                                 {"$gte" (-> start to-date-time with-time-at-start-of-day)
-                                  "$lte" (-> finish to-date-time .millisOfDay .withMaximumValue)}}))))
+                                {"$gte" (-> start to-date-time with-time-at-start-of-day)
+                                 "$lte" (-> finish to-date-time .millisOfDay .withMaximumValue)}}))))
 
 (defn connect
   "Connects to MongoDB and returns the database client."
   ([] (connect (env :mongodb-uri)))
   ([uri] (doto (:db (mongo/connect-via-uri uri))
-               (collection/ensure-index events-collection {:created_at 1}))))
+           (collection/ensure-index events-collection {:created_at 1}))))
+
+(defn- get-date-interval [year month]
+  (let [start (t/date-time year month)
+        end (-> start
+                (t/plus (t/months 1))
+                (t/minus (t/days 1)))]
+    [start end]))
+
+(defn get-events-for-month [db year month]
+  (let [[start end] (get-date-interval year month)]
+    (fetch db start end)))
