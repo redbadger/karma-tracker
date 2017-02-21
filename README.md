@@ -5,7 +5,7 @@ Open source contributions' tracker for organisations
 
 [![CircleCI](https://circleci.com/gh/redbadger/karma-tracker.svg?style=svg&circle-token=b630e33db6bb4b0d3d3497a50233efdbbca2a7e3)](https://circleci.com/gh/redbadger/karma-tracker)
 
-**NOTE: Karma Tracker is still work in progress and many more features and enhancement are planned to be release soon. Stay tuned!**
+**NOTE: Karma Tracker is still work in progress and many more features and enhancement are planned to be released soon. Stay tuned!**
 
 Karma Tracker generates contributions' reports to public projects by the developers of an organisation.
 It uses the [GitHub events API v3](https://developer.github.com/v3/activity/events/) in order to track the
