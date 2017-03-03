@@ -31,7 +31,7 @@
                        :opt-un [::commits]))
 
 (defn normalize [{:keys [type repo actor created_at] :as event}]
-  {:post [(s/valid? ::event %)]}
+  ;; {:post [(s/valid? ::event %)]}
   (merge {:type       (get-type type)
           :repo       (:name repo)
           :user       (:login actor)
