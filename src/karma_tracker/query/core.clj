@@ -14,10 +14,9 @@
 (s/def ::interval #(instance? org.joda.time.Interval %))
 (s/def ::query (s/keys :req-un [::source ::interval]))
 
-(defrecord Query [interval source])
-
 (defn new-query [start end source]
-  (->Query (time/interval start end) source))
+  {:interval (time/interval start end)
+   :source source})
 
 (defn load-events [events-storage interval]
   (->> (repo/fetch events-storage
