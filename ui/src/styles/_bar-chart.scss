@@ -1,0 +1,25 @@
+.bar-chart {
+  margin-bottom: -1rem;
+}
+
+.bar-chart__label {
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+
+.bar-chart__value {
+  margin-left: 0.75rem;
+  font-weight: 300;
+}
+
+.bar-chart__bar-container {
+  height: 1rem;
+  margin-bottom: 1rem;
+  line-height: 0;
+}
+
+.bar-chart__bar {
+  display: inline-block;
+  height: 100%;
+}

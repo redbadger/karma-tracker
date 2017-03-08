@@ -1,0 +1,24 @@
+.contributor {
+  @include make-col-ready();
+  margin-bottom: 1rem;
+
+  @include media-breakpoint-up(xs) {
+    @include make-col(8);
+  }
+  @include media-breakpoint-up(sm) {
+    @include make-col(6);
+  }
+  @include media-breakpoint-up(md) {
+    @include make-col(4);
+  }
+  @include media-breakpoint-up(lg) {
+    @include make-col(3);
+  }
+  @include media-breakpoint-up(xl) {
+    @include make-col(2);
+  }
+
+  &__avatar {
+    width: 100%;
+  }
+}

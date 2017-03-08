@@ -1,0 +1,32 @@
+.repositories {
+  @include make-bar-chart-col();
+}
+
+.repository {
+  &__owner {
+    color: $color-scorpion;
+    font-weight: 400;
+
+    &::after {
+      content: '/';
+    }
+  }
+
+  &__bar {
+    &--commits {
+      background-color: $color-commits;
+    }
+
+    &--pull-requests {
+      background-color: $color-pull-requests;
+    }
+
+    &--issues {
+      background-color: $color-issues;
+    }
+
+    &--comments {
+      background-color: $color-comments;
+    }
+  }
+}

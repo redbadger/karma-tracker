@@ -1,0 +1,21 @@
+{
+  "name": "karma-tracker-ui",
+  "description": "Visualisation of open-source contributions",
+  "private": true,
+  "version": "0.1.0",
+  "repository": "https://github.com/redbadger/karma-tracker",
+  "scripts": {
+    "start": "scripts/start.sh",
+    "build": "scripts/build.sh"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "auto-reload-brunch": "^2.7.1",
+    "bootstrap": "4.0.0-alpha.6",
+    "brunch": "^2.10.8",
+    "clean-css-brunch": "^2.10.0",
+    "concurrently": "^3.4.0",
+    "sass-brunch": "^2.10.4",
+    "svg-sprite-brunch": "^0.0.3"
+  }
+}

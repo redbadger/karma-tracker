@@ -1,0 +1,56 @@
+.date-selector {
+  @extend .sticky-top;
+  padding-top: 0.5rem;
+  padding-bottom: 0.75rem;
+  background-color: $color-mine-shaft;
+
+  &__current,
+  &__nav {
+    @include make-col-ready();
+  }
+
+  &__current {
+    margin-bottom: 0;
+    color: $color-alabaster;
+    text-align: center;
+    @include make-col(16);
+    @include make-col-push(4);
+  }
+
+  &__nav {
+    @include make-col(4);
+    color: $color-alabaster;
+    font-weight: 300;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+
+    &:hover,
+    &:focus {
+      color: $color-alabaster;
+    }
+
+    &--previous {
+      @include make-col-pull(16);
+    }
+
+    &--next {
+      justify-content: flex-end;
+    }
+  }
+
+
+  &__nav-icon {
+    stroke: $color-alabaster;
+    width: 1.12rem;
+    height: 2rem;
+    display: inline-block;
+  }
+
+  &__nav-text {
+    margin: 0.5rem;
+    @include media-breakpoint-down(xs) {
+      display: none;
+    }
+  }
+}
