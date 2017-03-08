@@ -35,20 +35,11 @@
       (merge (commits-stats events))
       (normalise-stats)))
 
-;; (def contributions-type-labels {:commits                     "Commits"
-;;                                 :push                        "Pushes"
-;;                                 :issue-comment               "Issues' comments"
-;;                                 :pull-request                "Pull requests"
-;;                                 :issue                       "Issues"
-;;                                 :pull-request-review-comment "Reviews' comments"})
-
 (defn contributions [events]
   (->> events
        activity-stats
        map-vals->percentage
        map-vals->rank
-       ;; (map (fn [[type values]]
-       ;;        [(get contributions-type-labels type) values]))
        rank->maps))
 
 (defn- repos-add-percentage [repos-contributions]

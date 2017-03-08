@@ -1,6 +1,6 @@
 (ns karma-tracker.cli)
 
-(def commands #{"update" "report"})
+(def commands #{"update" "report" "api"})
 
 (defmulti parse-args first)
 
@@ -15,6 +15,9 @@
     [:report (Integer. year) (Integer. month)]
     (catch NumberFormatException e
       [:error "The year or the month are not valid."])))
+
+(defmethod parse-args "api" [_]
+  [:api])
 
 (defmulti execute
   (fn [_ [command] & args]

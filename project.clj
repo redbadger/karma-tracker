@@ -9,13 +9,19 @@
                  [clj-time "0.13.0"]
                  [environ "1.1.0"]
                  [org.clojure/clojure "1.9.0-alpha14"]
-                 [cljstache "2.0.0"]]
-  :plugins [[lein-environ "1.1.0"]]
+                 [cljstache "2.0.0"]
+                 [ring "1.5.1"]
+                 [compojure "1.5.2"]
+                 [cheshire "5.7.0"]]
+  :plugins [[lein-environ "1.1.0"]
+            [lein-ring "0.11.0"]]
   :main ^:skip-aot karma-tracker.core
   :target-path "target/%s"
   :env {:organisation "redbadger"
-        :mongodb-uri "mongodb://127.0.0.1:27017/karma-tracker"}
+        :mongodb-uri  "mongodb://127.0.0.1:27017/karma-tracker"}
+  :ring {:handler karma-tracker.api/dev-handler}
   :profiles {:uberjar {:aot :all}
-             :test {:resource-paths ["resources-test"]
-                    :env {:mongodb-uri "mongodb://127.0.0.1:27017/karma-tracker-test"}}
-             :ci {:plugins [[lein-test-report-junit-xml "0.2.0"]]}})
+             :user    {:source-paths ["dev"]}
+             :test    {:resource-paths ["resources-test"]
+                       :env            {:mongodb-uri "mongodb://127.0.0.1:27017/karma-tracker-test"}}
+             :ci      {:plugins [[lein-test-report-junit-xml "0.2.0"]]}})

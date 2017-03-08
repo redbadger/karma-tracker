@@ -1,7 +1,9 @@
 (ns karma-tracker.commands
   (:require [environ.core :refer [env]]
-            [karma-tracker.update :refer [update-events]]
-            [karma-tracker.report :refer [make-report]]))
+            [karma-tracker
+             [report :refer [make-report]]
+             [update :refer [update-events]]]
+            [karma-tracker.api.core :as api]))
 
 (defmulti execute
   (fn [_ [command] & args]
@@ -24,3 +26,7 @@
 (defmethod execute :report [{:keys [github-conn events-storage]} [_ year month]]
   (make-report @github-conn @events-storage year month)
   [:report-generated year month])
+
+(defmethod execute :api [resources _]
+  (api/run-server resources)
+  [:server-stopped])

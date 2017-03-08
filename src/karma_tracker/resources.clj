@@ -1,10 +1,10 @@
 (ns karma-tracker.resources
-  (:require [karma-tracker
+  (:require [clj-time.core :refer [seconds]]
+            [environ.core :refer [env]]
+            [karma-tracker
+             [cache :as cache]
              [events-repository :as events-repo]
-             [github :as gh]
-             [cache :as cache]]
-            [clj-time.core :refer [seconds]]
-            [environ.core :refer [env]]))
+             [github :as gh]]))
 
 (defn languages-cache-max-age []
   (-> (env :languages-cache-max-age 86400)
