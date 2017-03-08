@@ -1,8 +1,9 @@
 (ns karma-tracker.query.languages
   (:require [clojure.string :as s]
-            [karma-tracker.github :as gh]
-            [karma-tracker.query.utils :refer :all]
-            [karma-tracker.cache :as cache]))
+            [karma-tracker
+             [cache :as cache]
+             [github :as gh]]
+            [karma-tracker.query.utils :refer :all]))
 
 (defn- fetch-and-save-languages [cache github-conn repo-name]
   (let [languages (->> (s/split repo-name #"\/")

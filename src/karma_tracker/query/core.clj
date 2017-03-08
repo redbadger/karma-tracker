@@ -1,18 +1,14 @@
 (ns karma-tracker.query.core
-  (:require [clojure.spec :as s]
-            [karma-tracker.aggregation :as ag]
-            [karma-tracker.events :refer [transform]]
-            [karma-tracker.events-repository :as repo]
-            [karma-tracker.query.contributions :as c]
-            [karma-tracker.query.languages :as l]
-            [karma-tracker.query.users :as u]
-            [karma-tracker.resources :refer [get-resources]]
-            [karma-tracker.github :as gh]
-            [clj-time.core :as time]))
-
-(s/def ::source keyword?)
-(s/def ::interval #(instance? org.joda.time.Interval %))
-(s/def ::query (s/keys :req-un [::source ::interval]))
+  (:require [clj-time.core :as time]
+            [karma-tracker
+             [events :refer [transform]]
+             [events-repository :as repo]
+             [github :as gh]
+             [resources :refer [get-resources]]]
+            [karma-tracker.query
+             [contributions :as c]
+             [languages :as l]
+             [users :as u]]))
 
 (defn new-query [start end source]
   {:interval (time/interval start end)
@@ -42,6 +38,9 @@
 
 (defmethod execute-query :repos-languages [{:keys [languages-cache github-conn]} _ events]
   (l/repos-languages @languages-cache @github-conn events))
+
+(defmethod execute-query :default [_ {:keys [source] :as query} _]
+  (throw (ex-info (str "Data source " (name source) " is not valid") {:query query})))
 
 (defn execute [resources {:keys [interval] :as query}]
   (let [events (load-events @(:events-storage resources) interval)]

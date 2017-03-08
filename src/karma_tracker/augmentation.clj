@@ -1,7 +1,6 @@
 (ns karma-tracker.augmentation
-  (:require [karma-tracker.github :as gh]
-            [clojure.string :as s]
-            [tentacles.core :as tc]))
+  (:require [clojure.string :as s]
+            [karma-tracker.github :as gh]))
 
 (defn- convert-to-percentage [total value]
   (->> (/ value total)

@@ -3,8 +3,7 @@
             [environ.core :refer [env]]
             [monger
              [collection :as collection]
-             [core :as mongo]])
-  (:import com.mongodb.DB))
+             [core :as mongo]]))
 
 (defn mongodb-connect
   "Connects to MongoDB and returns the database client."
@@ -52,10 +51,3 @@
   (if-let [document (read cache id)]
     document
     (write cache id (fetch-fn))))
-
-(comment
-  (def cache (connect "test-cache" (t/seconds 10)))
-  (write cache "test1" [1 2])
-  (read cache "test1")
-  (read-or-fetch cache "test1" #(+ 10 1))
-  )
