@@ -16,6 +16,7 @@
     "clean-css-brunch": "^2.10.0",
     "concurrently": "^3.4.0",
     "sass-brunch": "^2.10.4",
-    "svg-sprite-brunch": "^0.0.3"
+    "svg-sprite-brunch": "^0.0.3",
+    "zopfli-brunch": "^1.0.4"
   }
 }
