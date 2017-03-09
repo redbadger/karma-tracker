@@ -38,5 +38,8 @@
 (defn set! [route]
   (pushy/set-token! @history route))
 
+(defn replace! [route]
+  (pushy/replace-token! @history route))
+
 (defn overview [date]
   (str "/overview/" (format-year-month date)))

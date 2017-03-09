@@ -5,4 +5,4 @@
 (re-frame/reg-fx
  :redirect
  (fn [route]
-   (routes/set! route)))
+   (routes/replace! route)))
