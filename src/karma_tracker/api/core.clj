@@ -18,5 +18,5 @@
 
 (defn run-server [resources]
   (println "Api server running on port 8000")
-  (run-jetty (api (get-execution-fns))
+  (run-jetty (api (get-execution-fns resources))
              {:port 8000}))
