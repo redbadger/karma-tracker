@@ -1,6 +1,8 @@
 (ns karma-tracker-ui.core
   (:require [reagent.core :as reagent]
             [re-frame.core :as re-frame]
+            [day8.re-frame.http-fx]
+            [karma-tracker-ui.effects]
             [karma-tracker-ui.events]
             [karma-tracker-ui.subs]
             [karma-tracker-ui.routes :as routes]

@@ -1,11 +1,15 @@
 (ns karma-tracker-ui.views.format
   (:require [cljs-time.format :as format-time]))
 
+(defn safe-format-time [formatter value]
+  (when value
+    (format-time/unparse formatter value)))
+
 (def full-month-and-year
-  (partial format-time/unparse (format-time/formatter "MMMM YYYY")))
+  (partial safe-format-time (format-time/formatter "MMMM YYYY")))
 
 (def short-month
-  (partial format-time/unparse (format-time/formatter "MMM")))
+  (partial safe-format-time (format-time/formatter "MMM")))
 
 (defn percentage [value]
   (let [direction (cond
