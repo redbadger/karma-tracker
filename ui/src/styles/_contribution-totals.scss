@@ -1,6 +1,9 @@
 .contribution-totals {
-  @include make-row();
   margin-bottom: 1rem;
+
+  &__heading {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .contribution-total {

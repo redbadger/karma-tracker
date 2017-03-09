@@ -28,5 +28,7 @@
 (defn contribution-totals []
   (let [contribution-totals (re-frame/subscribe [:contribution-totals])]
     (fn []
-      (into [:section.contribution-totals]
-            (map-totals [contribution-total] @contribution-totals)))))
+      [:section.contribution-totals
+       [:h2.contribution-totals__heading "Red Badger open-source contributions"]
+       (into [:div.row]
+             (map-totals [contribution-total] @contribution-totals))])))
