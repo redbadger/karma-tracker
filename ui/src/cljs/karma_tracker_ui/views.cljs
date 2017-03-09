@@ -7,14 +7,16 @@
             [karma-tracker-ui.views.contributors :refer [contributors]]))
 
 (defn root []
-  (let [initialized? (re-frame/subscribe [:initialized?])]
+  (let [initialized? (re-frame/subscribe [:initialized?])
+        error? (re-frame/subscribe [:error?])]
     (fn []
       (when @initialized?
         [:div
          [date-selector]
-         [:div.container
-          [contribution-totals]
-          [:div.row
-           [repositories]
-           [languages]]
-          [contributors]]]))))
+         (when-not @error?
+           [:div.container
+            [contribution-totals]
+            [:div.row
+             [repositories]
+             [languages]]
+            [contributors]])]))))

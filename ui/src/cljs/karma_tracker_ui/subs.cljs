@@ -9,6 +9,13 @@
    (not= :initializing (:state db))))
 
 (re-frame/reg-sub
+ :error?
+ (fn [db]
+   (or (= :error (:state db))
+       (and (= :loading (:state db))
+            (= :error (:previous-state db))))))
+
+(re-frame/reg-sub
  :current-date
  (fn [db]
    (:date db)))

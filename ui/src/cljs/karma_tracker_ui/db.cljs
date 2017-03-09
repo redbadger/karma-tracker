@@ -6,6 +6,8 @@
 
 (spec/def ::state #{:initializing :loading :ready :error})
 
+(spec/def ::previous-state ::state)
+
 (spec/def ::date #(instance? goog.date.DateTime %))
 
 (spec/def ::count nat-int?)
@@ -42,7 +44,7 @@
 (spec/def ::contributors (spec/coll-of ::contributor))
 
 (spec/def ::db (spec/keys :req-un [::state]
-                          :opt-un [::date ::contribution-totals ::repositories ::languages ::contributors]))
+                          :opt-un [::previous-state ::date ::contribution-totals ::repositories ::languages ::contributors]))
 
 (def default
   {:state :initializing})

@@ -6,6 +6,10 @@
             [cljs-time.core :as time]
             [cljs.spec :as spec]))
 
+(defn transition [db state]
+  (merge db {:previous-state (:state db)
+             :state state}))
+
 (defn check-spec
   [spec db]
   (when-not (spec/valid? spec db)
@@ -29,9 +33,10 @@
  :select-overview
  [check-spec-interceptor]
  (fn [cofx [_ date]]
-   {:db (merge (:db cofx)
-               {:state :loading
-                :date date})
+   {:db (-> cofx
+            :db
+            (assoc :date date)
+            (transition :loading))
     :http-xhrio (overview-api/request date)}))
 
 (re-frame/reg-event-db
@@ -39,7 +44,9 @@
  [check-spec-interceptor]
  (fn [db [_ date response]]
    (if (= date (:date db))
-     (merge db (overview-api/response response) {:state :ready})
+     (-> db
+         (merge (overview-api/response response))
+         (transition :ready))
      db)))
 
 (re-frame/reg-event-db
@@ -47,4 +54,4 @@
  [check-spec-interceptor]
  (fn [db [_ result]]
    (.error js/console "API request failed:" result)
-   (assoc db :state :error)))
+   (transition db :error)))
