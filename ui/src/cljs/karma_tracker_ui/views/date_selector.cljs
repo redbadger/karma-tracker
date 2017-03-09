@@ -26,8 +26,7 @@
 (defn date-selector []
   (fn []
     [:header.date-selector
-     [:div.container
-      [:nav.row
-       [current-date]
-       [previous-date]
-       [next-date]]]]))
+     [:div.date-selector__container
+      [current-date]
+      [previous-date]
+      [next-date]]]))

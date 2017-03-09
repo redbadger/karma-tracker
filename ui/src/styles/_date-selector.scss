@@ -4,21 +4,19 @@
   padding-bottom: 0.75rem;
   background-color: $color-mine-shaft;
 
-  &__current,
-  &__nav {
-    @include make-col-ready();
+  &__container {
+    @include make-container();
+    @include make-container-max-widths();
+    display: flex;
   }
 
   &__current {
     margin-bottom: 0;
     color: $color-alabaster;
-    text-align: center;
-    @include make-col(16);
-    @include make-col-push(4);
+    flex-grow: 1;
   }
 
   &__nav {
-    @include make-col(4);
     color: $color-alabaster;
     font-weight: 300;
     line-height: 1;
@@ -30,12 +28,13 @@
       color: $color-alabaster;
     }
 
-    &--previous {
-      @include make-col-pull(16);
+    &--next {
+      margin-left: 2rem;
     }
 
-    &--next {
-      justify-content: flex-end;
+    @include media-breakpoint-down(xs) {
+      width: 2.5rem;
+      justify-content: center;
     }
   }
 
