@@ -11,6 +11,7 @@
                  [org.clojure/clojure "1.9.0-alpha14"]
                  [cljstache "2.0.0"]
                  [ring "1.5.1"]
+                 [ring-cors "0.1.9"]
                  [compojure "1.5.2"]
                  [cheshire "5.7.0"]]
   :plugins [[lein-environ "1.1.0"]

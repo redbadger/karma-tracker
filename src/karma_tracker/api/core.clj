@@ -5,13 +5,16 @@
             [ring.adapter.jetty :refer [run-jetty]]
             [ring.middleware
              [keyword-params :refer [wrap-keyword-params]]
-             [params :refer [wrap-params]]]))
+             [params :refer [wrap-params]]
+             [cors :refer [wrap-cors]]]))
 
 (defn api [execution-fns]
   (-> (routes
        (query-routes (:query execution-fns)))
       (wrap-keyword-params)
-      (wrap-params)))
+      (wrap-params)
+      (wrap-cors :access-control-allow-origin [#".*"]
+                 :access-control-allow-methods [:get])))
 
 (defn get-execution-fns [resources]
   {:query (partial query/execute resources)})
