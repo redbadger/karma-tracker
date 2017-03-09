@@ -2,4 +2,4 @@
 
 (defn users [events]
   "Aggregates events into a set of users login names"
-  (->> events (map :user) set))
+  (->> events (map :user) set sort))
