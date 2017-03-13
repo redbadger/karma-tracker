@@ -41,7 +41,8 @@
   (->> events
        (repos-languages cache github-conn)
        vals
-       (apply merge-with +)
+       (mapcat keys)
+       frequencies
        map-vals->percentage
        map-vals->rank
        (map (fn [[language values]]
