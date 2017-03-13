@@ -31,5 +31,6 @@
                         :compiler {:main karma-tracker-ui.core
                                    :output-to "target/js/app.js"
                                    :optimizations :advanced
-                                   :closure-defines {goog.DEBUG false}
+                                   :closure-defines {goog.DEBUG false
+                                                     karma-tracker-ui.config.api-url "https://karma.red-badger.com/api"}
                                    :pretty-print false}}]})
