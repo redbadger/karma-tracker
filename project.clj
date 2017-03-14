@@ -13,7 +13,8 @@
                  [ring "1.5.1"]
                  [ring-cors "0.1.9"]
                  [compojure "1.5.2"]
-                 [cheshire "5.7.0"]]
+                 [cheshire "5.7.0"]
+                 [org.slf4j/slf4j-nop "1.7.12"]]
   :plugins [[lein-environ "1.1.0"]
             [lein-ring "0.11.0"]]
   :main ^:skip-aot karma-tracker.core
