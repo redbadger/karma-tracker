@@ -4,9 +4,9 @@
             [karma-tracker.query.core :as query]
             [ring.adapter.jetty :refer [run-jetty]]
             [ring.middleware
+             [cors :refer [wrap-cors]]
              [keyword-params :refer [wrap-keyword-params]]
-             [params :refer [wrap-params]]
-             [cors :refer [wrap-cors]]]))
+             [params :refer [wrap-params]]]))
 
 (defn api [execution-fns]
   (-> (routes

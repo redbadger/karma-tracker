@@ -14,7 +14,7 @@
   {:interval (time/interval start end)
    :source source})
 
-(defn load-events [events-storage interval]
+(defn- load-events [events-storage interval]
   (->> (repo/fetch events-storage
                    (time/start interval)
                    (time/end interval))
@@ -45,14 +45,3 @@
 (defn execute [resources {:keys [interval] :as query}]
   (let [events (load-events @(:events-storage resources) interval)]
     (execute-query resources query events)))
-
-(comment
-  (def events (repo/get-events-for-month (repo/connect) 2017 2))
-  (def gh (gh/new-connection))
-  (->> events
-       (sequence transform)
-       (l/languages gh))
-  (execute (get-resources) (new-query (time/date-time 2017 2 1)
-                                      (time/date-time 2017 2 28)
-                                      :repos-languages))
-  )
