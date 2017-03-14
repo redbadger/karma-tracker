@@ -23,7 +23,8 @@
         :mongodb-uri  "mongodb://127.0.0.1:27017/karma-tracker"}
   :ring {:handler karma-tracker.api/dev-handler}
   :profiles {:uberjar {:aot :all}
-             :user    {:source-paths ["dev"]}
+             :repl    {:source-paths   ["dev"]
+                       :resource-paths ["resources-test"]}
              :test    {:resource-paths ["resources-test"]
                        :env            {:mongodb-uri "mongodb://127.0.0.1:27017/karma-tracker-test"}}
              :ci      {:plugins [[lein-test-report-junit-xml "0.2.0"]]}})
