@@ -41,3 +41,11 @@
     (is (= @queries [{:source :users :interval query-interval}
                      {:source :contributions :interval query-interval}]))
     (is (= (:body response) "{\"contributions\":\"multiple fake query response\",\"users\":\"multiple fake query response\"}"))))
+
+(deftest no-events-response
+  (let [request            (make-request :get "/api/query/2017-01-01/2017-03-31/languages")
+        [queries response] (process-request request (constantly []))]
+    (is (= (:status response) 404))
+    (is (= (:body response) "[]"))
+    (is (= (:headers response) {"Content-Type"  "application/json",
+                                "Cache-Control" "max-age=86400; public"}))))

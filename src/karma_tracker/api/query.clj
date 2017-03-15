@@ -17,20 +17,32 @@
 (defn- request->query [{:keys [params] :as request}]
   (params->query params))
 
-(defn- invalid-request-response [error]
-  {:status 400
-   :body (generate-string {:error error})})
-
 (defn- default-headers [request]
   (-> request
       (content-type "application/json")
       (header "Cache-Control" "max-age=86400; public")))
 
-(defn- query-response [query-result]
+(defn- invalid-request-response [error]
+  (-> {:error error}
+      generate-string
+      response
+      (status 400)))
+
+(defn- successful-query-response [query-result]
   (-> query-result
       generate-string
       response
       default-headers))
+
+(defn- not-found-response [query-result]
+  (-> query-result
+      successful-query-response
+      (status 404)))
+
+(defn- query-response [query-result]
+  (if (empty? query-result)
+    (not-found-response query-result)
+    (successful-query-response query-result)))
 
 (defn- query-handler [query-execution-fn request]
   (try
