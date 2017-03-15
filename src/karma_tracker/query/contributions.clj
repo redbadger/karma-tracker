@@ -17,12 +17,20 @@
 (defn- activity-stats-inc [value]
   (if (nil? value) 1 (inc value)))
 
+(defn- normalise-comment-field [{issues :issue-comment prs :pull-request-review-comment
+                                 :or {issues 0 prs 0}
+                                 :as stats}]
+  (let [sum (+ issues prs)]
+    (if (> sum 0)
+      (assoc stats :comment sum)
+      stats)))
+
 (defn- normalise-stats [{issues :issue-comment prs :pull-request-review-comment
                          :or {issues 0 prs 0}
                          :as stats}]
   (-> stats
       (dissoc :push)
-      (assoc :comment (+ issues prs))
+      (normalise-comment-field)
       (dissoc :issue-comment :pull-request-review-comment)))
 
 (defn- activity-stats [events]

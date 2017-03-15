@@ -44,24 +44,20 @@
   (let [query (test-query :contributions)]
     (is (= '({:item :commit, :value 11, :percentage "84.6%"}
              {:item :issue, :value 1, :percentage "7.7%"}
-             {:item :pull-request, :value 1, :percentage "7.7%"}
-             {:item :comment, :value 0, :percentage "0.0%"})
+             {:item :pull-request, :value 1, :percentage "7.7%"})
            (execute (get-resources) query)))))
 
 (deftest execute-repos-contributions-query-test
   (let [query (test-query :repos-contributions)]
     (is (= '({:commit 11,
-              :comment 0,
               :repo "redbadger/blog-squarespace-template",
               :total 11,
               :percentage "84.6%"}
              {:issue 1,
-              :comment 0,
               :repo "facebook/react",
               :total 1,
               :percentage "7.7%"}
              {:pull-request 1,
-              :comment 0,
               :repo "facebook/react-devtools",
               :total 1,
               :percentage "7.7%"})
