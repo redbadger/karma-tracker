@@ -57,3 +57,11 @@
 (deftest creates-index
   (let [index-keys (map :key (collection/indexes-on db events-collection))]
     (is (some #{{:created_at 1}} index-keys))))
+
+(deftest get-available-months-test
+  (add db [{:id 1, :created_at (date-time 2017 1)}
+           {:id 2, :created_at (date-time 2017 2)}
+           {:id 3, :created_at (date-time 2016 12)}
+           {:id 4, :created_at (date-time 2016 11)}])
+  (is (= (get-available-months db)
+         [[2016 11] [2016 12] [2017 1] [2017 2]])))

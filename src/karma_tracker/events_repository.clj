@@ -4,7 +4,7 @@
             [monger.query :as q]
             monger.joda-time
             [clj-time.core :refer [with-time-at-start-of-day] :as t]
-            [clj-time.coerce :refer [to-date-time]]
+            [clj-time.coerce :refer [to-date-time to-long]]
             [clj-time.format :as format]
             [clojure.walk :refer [postwalk]]
             [clojure.set :refer [rename-keys]]
@@ -66,8 +66,8 @@
     (map #(rename-keys % {:_id :id})
          (q/with-collection db events-collection
            (q/find {:created_at
-                  {"$gte" (-> start to-date-time with-time-at-start-of-day)
-                   "$lte" (-> finish to-date-time .millisOfDay .withMaximumValue)}})
+                    {"$gte" (-> start to-date-time with-time-at-start-of-day)
+                     "$lte" (-> finish to-date-time .millisOfDay .withMaximumValue)}})
            (q/sort (array-map :created_at 1))))))
 
 (defn connect
@@ -86,3 +86,18 @@
 (defn get-events-for-month [db year month]
   (let [[start end] (get-date-interval year month)]
     (fetch db start end)))
+
+(defn get-available-months [db]
+  (->> (collection/aggregate db
+                             "events"
+                             [{"$group" {"_id" {"year"  {"$year" "$created_at"}
+                                                "month" {"$month" "$created_at"}}}}])
+       (mapcat vals)
+       (map vals)
+       (sort (fn [args1 args2]
+               (compare (->> args1
+                             (apply t/date-time)
+                             to-long)
+                        (->> args2
+                             (apply t/date-time)
+                             to-long))))))
