@@ -8,13 +8,17 @@
              [keyword-params :refer [wrap-keyword-params]]
              [params :refer [wrap-params]]]))
 
-(defn api [execution-fns]
-  (-> (routes
-       (query-routes (:query execution-fns)))
+(defn wrap-handler [handler]
+  (-> handler
       (wrap-keyword-params)
       (wrap-params)
       (wrap-cors :access-control-allow-origin [#".*"]
                  :access-control-allow-methods [:get])))
+
+(defn api [execution-fns]
+  (-> (routes
+       (query-routes (:query execution-fns)))
+      wrap-handler))
 
 (defn get-execution-fns [resources]
   {:query (partial query/execute resources)})

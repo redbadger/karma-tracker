@@ -8,31 +8,31 @@
 
 (def date-formatter (formatter "yyyy-MM-dd"))
 
-(defn params->query [params]
+(defn- params->query [params]
   (let [{:keys [start end source]} params]
     {:interval (t/interval (parse date-formatter start)
                            (parse date-formatter end))
      :source (keyword source)}))
 
-(defn request->query [{:keys [params] :as request}]
+(defn- request->query [{:keys [params] :as request}]
   (params->query params))
 
-(defn invalid-request-response [error]
+(defn- invalid-request-response [error]
   {:status 400
    :body (generate-string {:error error})})
 
-(defn default-headers [request]
+(defn- default-headers [request]
   (-> request
       (content-type "application/json")
       (header "Cache-Control" "max-age=86400; public")))
 
-(defn query-response [query-result]
+(defn- query-response [query-result]
   (-> query-result
       generate-string
       response
       default-headers))
 
-(defn query-handler [query-execution-fn request]
+(defn- query-handler [query-execution-fn request]
   (try
     (-> request
         request->query
@@ -41,12 +41,12 @@
     (catch RuntimeException e
       (invalid-request-response (.getMessage e)))))
 
-(defn parse-sources [sources]
+(defn- parse-sources [sources]
   (if (sequential? sources)
     (set sources)
     (set (list sources))))
 
-(defn params->queries [params]
+(defn- params->queries [params]
   (let [sources (-> params :s parse-sources)]
     (map (fn [source]
            (-> params
@@ -54,7 +54,7 @@
                params->query))
          sources)))
 
-(defn multi-query-handler [query-execution-fn {:keys [params] :as request}]
+(defn- multi-query-handler [query-execution-fn {:keys [params] :as request}]
   (try
     (->> params
          params->queries
