@@ -6,12 +6,6 @@
   (testing "Update command"
     (is (= [:update]
            (parse-args ["update"]))))
-  (testing "Report with right data"
-    (is (= [:report 2017 1]
-           (parse-args ["report" "2017" "01"]))))
-  (testing "Report with wrong data"
-    (is (= [:error "The year or the month are not valid."]
-           (parse-args ["report" "2017" "a"]))))
   (testing "Unknown command"
     (is (= [:unknown "whatACommand"]
            (parse-args ["whatACommand" "1-2-3"])))))
@@ -34,7 +28,4 @@
     (is (= "" (with-out-str (show-result [:unknown-event])))))
   (testing "Events updated"
     (is (= "Events updated succesfully\n"
-           (with-out-str (show-result [:events-updated])))))
-  (testing "Report generated"
-    (is (= "Report generated for 1 2017\n"
-           (with-out-str (show-result [:report-generated 2017 1]))))))
+           (with-out-str (show-result [:events-updated]))))))

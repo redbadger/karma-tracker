@@ -10,12 +10,6 @@
 (defmethod parse-args "update" [_]
   [:update])
 
-(defmethod parse-args "report" [[_ year month]]
-  (try
-    [:report (Integer. year) (Integer. month)]
-    (catch NumberFormatException e
-      [:error "The year or the month are not valid."])))
-
 (defmethod parse-args "api" [_]
   [:api])
 
@@ -41,9 +35,6 @@
 
 (defmethod show-result :events-updated [_]
   (println "Events updated succesfully"))
-
-(defmethod show-result :report-generated [[_ year month]]
-  (println "Report generated for" month year))
 
 (defmethod show-result :error [[_ message]]
   (println "Error:" message))
