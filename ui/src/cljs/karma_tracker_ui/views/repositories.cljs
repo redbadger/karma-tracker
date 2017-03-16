@@ -10,8 +10,9 @@
 (defn repository [repository bar-scale]
   [:div.repository
    [:div.bar-chart__label
-    [:span.repository__owner (:owner repository)]
-    [:span.repository__name (:name repository)]
+    [:a.repository__link {:href (:link repository) :target "_blank"}
+     [:span.repository__owner (:owner repository)]
+     [:span.repository__name (:name repository)]]
     [:span.bar-chart__value (-> repository :total :count)]]
    (into [:div.bar-chart__bar-container]
          (map-totals [repository-bar-segment bar-scale] repository))])

@@ -39,10 +39,11 @@
        :contribution-totals
        (dissoc :total))))
 
-(defn split-repository-name [repository-name]
+(defn additional-repository-info [repository-name]
   (let [[owner name] (string/split repository-name #"/")]
     {:owner owner
-     :name name}))
+     :name name
+     :link (str "https://github.com/" owner "/" name)}))
 
 (re-frame/reg-sub
  :repository-totals
@@ -50,7 +51,7 @@
    (->> db
         :repositories
         (take number)
-        (map (fn [[name values]] (merge (split-repository-name name) values))))))
+        (map (fn [[name values]] (merge (additional-repository-info name) values))))))
 
 (re-frame/reg-sub
  :language-totals

@@ -12,6 +12,10 @@
     }
   }
 
+  &__link {
+    color: black;
+  }
+
   &__bar {
     &--commits {
       background-color: $color-commits;
