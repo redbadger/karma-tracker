@@ -3,7 +3,7 @@
 
 (defn contributor [{:keys [username avatar]}]
   [:figure.contributor {:title username}
-   [:img.contributor__avatar {:alt username, :src avatar}]])
+   ^{:key username} [:img.contributor__avatar {:alt username, :src avatar}]])
 
 (defn contributors []
   (let [contributors (re-frame/subscribe [:contributors])]
