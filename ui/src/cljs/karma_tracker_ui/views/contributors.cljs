@@ -1,9 +1,10 @@
 (ns karma-tracker-ui.views.contributors
   (:require [re-frame.core :as re-frame]))
 
-(defn contributor [{:keys [username avatar]}]
+(defn contributor [{:keys [username avatar link]}]
   [:figure.contributor {:title username}
-   ^{:key username} [:img.contributor__avatar {:alt username, :src avatar}]])
+   ^{:key username} [:a.contributor__link {:href link :target "_blank"}
+                     [:img.contributor__avatar {:alt username, :src avatar}]]])
 
 (defn contributors []
   (let [contributors (re-frame/subscribe [:contributors])]

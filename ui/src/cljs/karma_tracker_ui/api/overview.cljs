@@ -70,7 +70,8 @@
 
 (defn contributor [username]
   {:username username
-   :avatar (str "https://github.com/" username ".png?size=240")})
+   :avatar (str "https://github.com/" username ".png?size=240")
+   :link (str "https://github.com/" username)})
 
 (defn contributors [{:keys [users]}]
   (map contributor users))
