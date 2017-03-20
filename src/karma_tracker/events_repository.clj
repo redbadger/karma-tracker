@@ -1,6 +1,7 @@
 (ns karma-tracker.events-repository
   (:require [monger.core :as mongo]
             [monger.collection :as collection]
+            [monger.query :as q]
             monger.joda-time
             [clj-time.core :refer [with-time-at-start-of-day] :as t]
             [clj-time.coerce :refer [to-date-time]]
@@ -32,7 +33,6 @@
 
 (def events-collection "events")
 (def date-time-format (format/formatter :date-time-no-ms))
-(DateTimeZone/setDefault DateTimeZone/UTC)
 
 (defn try-parse-date-time
   "Attempts to parse the given value as a date-time.
@@ -64,10 +64,11 @@
 
   (fetch [db start finish]
     (map #(rename-keys % {:_id :id})
-         (collection/find-maps db events-collection
-                               {:created_at
-                                {"$gte" (-> start to-date-time with-time-at-start-of-day)
-                                 "$lte" (-> finish to-date-time .millisOfDay .withMaximumValue)}}))))
+         (q/with-collection db events-collection
+           (q/find {:created_at
+                  {"$gte" (-> start to-date-time with-time-at-start-of-day)
+                   "$lte" (-> finish to-date-time .millisOfDay .withMaximumValue)}})
+           (q/sort (array-map :created_at 1))))))
 
 (defn connect
   "Connects to MongoDB and returns the database client."

@@ -1,7 +1,6 @@
 (ns karma-tracker.augmentation
-  (:require [karma-tracker.github :as gh]
-            [clojure.string :as s]
-            [tentacles.core :as tc]))
+  (:require [clojure.string :as s]
+            [karma-tracker.github :as gh]))
 
 (defn- convert-to-percentage [total value]
   (->> (/ value total)
@@ -135,26 +134,3 @@
   "Execute the augmentation with the default augmenters functions"
   (let [augment-fn (make-augment-fn default-augmenters github-conn)]
     (augment-fn aggregation)))
-
-(comment
-  (require '[karma-tracker.events :as e]
-           '[karma-tracker.aggregation :as a]
-           '[karma-tracker.github :as gh]
-           '[karma-tracker.report :as r]
-           '[criterium.core :as c]
-           '[cljstache.core :refer [render-resource]])
-
-  (-> repo
-      r/generate-report
-      r/save-report)
-
-  (def conn (gh/new-connection))
-  (def events
-    (gh/organisation-performed-events conn "redbadger"))
-
-  (def repo (->> events
-                 (sequence e/transform)
-                 a/aggregate
-                 (augment conn)))
-
-  (->> repo :languages-chart))

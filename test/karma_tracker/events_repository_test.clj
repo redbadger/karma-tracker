@@ -3,7 +3,8 @@
             [karma-tracker.events-repository :refer :all]
             [monger.db :as database]
             [monger.collection :as collection]
-            [clj-time.core :refer [date-time local-date]]))
+            [clj-time.core :refer [date-time local-date]])
+  (:import [org.joda.time DateTimeZone]))
 
 (def db (connect))
 
@@ -11,6 +12,11 @@
   (collection/remove db events-collection)
   (f))
 
+(defn setup [tests]
+  (DateTimeZone/setDefault DateTimeZone/UTC)
+  (tests))
+
+(use-fixtures :once setup)
 (use-fixtures :each clean-db)
 
 (deftest inserts-new-events
