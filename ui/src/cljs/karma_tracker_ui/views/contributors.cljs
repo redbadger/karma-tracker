@@ -2,9 +2,9 @@
   (:require [re-frame.core :as re-frame]))
 
 (defn contributor [{:keys [username avatar link]}]
-  [:figure.contributor {:title username}
-   ^{:key username} [:a.contributor__link {:href link :target "_blank"}
-                     [:img.contributor__avatar {:alt username, :src avatar}]]])
+  [:figure.contributor {:key username, :title username}
+   [:a.contributor__link {:href link, :target "_blank"}
+    [:img.contributor__avatar {:alt username, :src avatar}]]])
 
 (defn contributors []
   (let [contributors (re-frame/subscribe [:contributors])]
