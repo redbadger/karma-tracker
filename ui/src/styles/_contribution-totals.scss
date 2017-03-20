@@ -1,0 +1,81 @@
+.contribution-totals {
+  margin-bottom: 1rem;
+
+  &__heading {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.contribution-total {
+  @include make-col-ready();
+  margin-bottom: 2rem;
+
+  @include media-breakpoint-up(xs) {
+    @include make-col(12);
+  }
+
+  @include media-breakpoint-up(md) {
+    @include make-col(6);
+  }
+
+  &__container {
+    border-width: 4px;
+    border-style: solid;
+
+    &--commits {
+      border-color: $color-commits;
+    }
+
+    &--pull-requests {
+      border-color: $color-pull-requests;
+    }
+
+    &--issues {
+      border-color: $color-issues;
+    }
+
+    &--comments {
+      border-color: $color-comments;
+    }
+  }
+
+  &__type,
+  &__count,
+  &__change {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  &__type {
+    padding-top: 0.5rem;
+    padding-bottom: 0.75rem;
+    font-size: 1.25rem;
+
+    &--commits {
+      background-color: $color-commits;
+    }
+
+    &--pull-requests {
+      background-color: $color-pull-requests;
+    }
+
+    &--issues {
+      background-color: $color-issues;
+    }
+
+    &--comments {
+      background-color: $color-comments;
+    }
+  }
+
+  &__count {
+    font-size: 3rem;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  &__change {
+    color: $color-scorpion;
+    margin-bottom: 0.5rem;
+  }
+}

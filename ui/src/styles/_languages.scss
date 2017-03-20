@@ -1,0 +1,7 @@
+.languages {
+  @include make-bar-chart-col();
+}
+
+.language__bar {
+  background-color: $color-languages;
+}

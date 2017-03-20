@@ -1,0 +1,20 @@
+body {
+  padding: 0;
+  background-color: $color-alabaster;
+  color: $color-mine-shaft;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 300;
+}
+
+header,
+section {
+  margin-bottom: 2rem;
+}
+
+.explanation {
+  color: $color-scorpion;
+}

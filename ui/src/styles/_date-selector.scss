@@ -1,0 +1,55 @@
+.date-selector {
+  @extend .sticky-top;
+  padding-top: 0.5rem;
+  padding-bottom: 0.75rem;
+  background-color: $color-mine-shaft;
+
+  &__container {
+    @include make-container();
+    @include make-container-max-widths();
+    display: flex;
+  }
+
+  &__current {
+    margin-bottom: 0;
+    color: $color-alabaster;
+    flex-grow: 1;
+  }
+
+  &__nav {
+    color: $color-alabaster;
+    font-weight: 300;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+
+    &:hover,
+    &:focus {
+      color: $color-alabaster;
+    }
+
+    &--next {
+      margin-left: 2rem;
+    }
+
+    @include media-breakpoint-down(xs) {
+      width: 2.5rem;
+      justify-content: center;
+    }
+  }
+
+
+  &__nav-icon {
+    stroke: $color-alabaster;
+    width: 1.12rem;
+    height: 2rem;
+    display: inline-block;
+  }
+
+  &__nav-text {
+    margin: 0.5rem;
+    @include media-breakpoint-down(xs) {
+      display: none;
+    }
+  }
+}
