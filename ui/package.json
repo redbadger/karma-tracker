@@ -6,7 +6,8 @@
   "repository": "https://github.com/redbadger/karma-tracker",
   "scripts": {
     "start": "scripts/start.sh",
-    "build": "scripts/build.sh"
+    "build": "scripts/build.sh",
+    "push": "scripts/push.sh"
   },
   "dependencies": {},
   "devDependencies": {

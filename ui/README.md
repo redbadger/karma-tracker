@@ -16,5 +16,7 @@ Wait a bit, then browse to [http://localhost:3333](http://localhost:3333).
 ## Production build
 
 ```console
-$ yarn build
+$ yarn build [version]
 ```
+
+`version` defaults to `latest`.
