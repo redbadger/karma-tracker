@@ -48,9 +48,9 @@ Default region name [None]: eu-west-1
 Default output format [None]:
 ```
 
-Download Terraform modules:
+Download Terraform state and modules:
 ```console
-$ terraform get
+$ terraform init
 ```
 
 Log in to the Docker registry:
