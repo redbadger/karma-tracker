@@ -21,11 +21,19 @@ To populate the database run a MongoDB instance (as explained later) and run the
 ```shell
 $ lein run update
 ```
-when finished generate a report
+when finished start the API server
 ```shell
-$ lein run report 2017 1
+$ lein run api
 ```
-the file `report-2017-1.html` will be created in the current directory.
+the server is going to listen to the port 8000.
+
+Now you can start the UI
+```shell
+$ cd ui
+$ ui> yarn
+$ ui> yarn start
+```
+Open the browser at http://localhost:3333 and have fun.
 
 ## Running MongoDB
 
