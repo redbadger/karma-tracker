@@ -1,0 +1,23 @@
+[
+  {
+    "name": "ui",
+    "image": "458707459747.dkr.ecr.eu-west-1.amazonaws.com/karma-tracker/ui:${version}",
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "hostPort": 0,
+        "protocol": "tcp"
+      }
+    ],
+    "memoryReservation": 64,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "karma-tracker-ui",
+        "awslogs-region": "${region}",
+        "awslogs-stream-prefix": "karma-tracker-ui"
+      }
+    }
+  }
+]

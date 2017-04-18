@@ -1,0 +1,23 @@
+[
+  {
+    "name": "update",
+    "image": "458707459747.dkr.ecr.eu-west-1.amazonaws.com/karma-tracker/cli:${version}",
+    "command": ["update"],
+    "essential": true,
+    "environment": [
+      {"name": "MONGODB_URI", "value": "${mongodb_uri}"},
+      {"name": "GITHUB_USER", "value": "${github_username}"},
+      {"name": "GITHUB_TOKEN", "value": "${github_token}"},
+      {"name": "ORGANISATION", "value": "redbadger"}
+    ],
+    "memoryReservation": 256,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "karma-tracker-update",
+        "awslogs-region": "${region}",
+        "awslogs-stream-prefix": "karma-tracker-update"
+      }
+    }
+  }
+]

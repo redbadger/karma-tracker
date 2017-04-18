@@ -1,5 +1,6 @@
 (ns karma-tracker.api.core
   (:require [compojure.core :refer :all]
+            [karma-tracker.api.health-check :refer [health-check-routes]]
             [karma-tracker.api.query :refer [query-routes]]
             [karma-tracker.query.core :as query]
             [ring.adapter.jetty :refer [run-jetty]]
@@ -15,15 +16,16 @@
       (wrap-cors :access-control-allow-origin [#".*"]
                  :access-control-allow-methods [:get])))
 
-(defn api [execution-fns]
-  (-> (routes
-       (query-routes (:query execution-fns)))
-      wrap-handler))
-
 (defn get-execution-fns [resources]
   {:query (partial query/execute resources)})
 
+(defn api [resources]
+  (-> (routes
+       (health-check-routes resources)
+       (query-routes (-> resources get-execution-fns :query)))
+      wrap-handler))
+
 (defn run-server [resources]
   (println "Api server running on port 8000")
-  (run-jetty (api (get-execution-fns resources))
+  (run-jetty (api resources)
              {:port 8000}))
